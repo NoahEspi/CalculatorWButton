@@ -10,19 +10,19 @@ window.rowconfigure(0, weight=1, minsize=50)
 
 window.title("Calcutator Fo Real")
 
-prevAns = "";
-
 
 # frame configurations
 screenFrame = tk.Frame(window, relief=tk.RAISED, borderwidth = 1)
 
 numberFrame = tk.Frame(window)
 
-
+# establishes variables
 equation = [];
+prevAns = "";
 
 
-# number functions
+
+# creates number functions
 def numZero():
   equation.append('0');
   screenDisplay.configure(text=equation);
@@ -63,12 +63,17 @@ def numNine():
   equation.append('9');
   screenDisplay.configure(text=equation);
 
+def doubleZero():
+  equation.append("00");
+  screenDisplay.configure(text=equation);
+
 def decimal():
   equation.append('.');
   screenDisplay.configure(text=equation);
 
 
-# operation functions
+
+# creates operator functions
 def addSign():
   equation.append('+');
   screenDisplay.configure(text=equation);
@@ -85,46 +90,113 @@ def divSign():
   equation.append('/');
   screenDisplay.configure(text=equation);
 
-# when button pushed, calculates existing equation
+def leftParen():
+  equation.append("(");
+  screenDisplay.configure(text=equation);
+
+#################################################### add so it auto adds right at end of equation if not in it
+def rightParen():
+  equation.append(")");
+  screenDisplay.configure(text=equation);
+
+
+# calculation functions
+
+# calculates exisitng equation. if it can't, returns error
 def equalSign():
   global equation
   global prevAns
 
+  # checks if equation is empty
   if equation != []:
-    try:
-      combEquation = ''.join(equation);
-      combEquation = eval(combEquation);
-
-      screenDisplay.configure(text=combEquation);
-      equation.clear()
-      prevAns = str(combEquation);
-    except Exception:
+    
+    # checks parenthesis capatability
+    leftCount = equation.count("(");
+    rightCount = equation.count(")");
+    if leftCount != rightCount:
+      screenDisplay.configure(text="ERROR: SYNTAX (PARENTHESES)");
       equation.clear();
-      screenDisplay.configure(text="ERROR: SYNTAX")
 
-# same as equalSign, but divides the final answer by 100
+    else:
+      try:
+        
+        combEquation = ''.join(equation);
+        combEquation = eval(combEquation);
+
+        screenDisplay.configure(text=combEquation);
+        equation.clear()
+        prevAns = str(combEquation);
+      except Exception:
+        equation.clear();
+        screenDisplay.configure(text="ERROR: SYNTAX")
+
+
+# same function as equalSign except divides the answer by 100
 def percentButton():
+  global equation
+  global prevAns
+  
+  if equation != []:
+
+    # checks parenthesis capatability
+    leftCount = equation.count("(");
+    rightCount = equation.count(")");
+    if leftCount != rightCount:
+      screenDisplay.configure(text="ERROR: SYNTAX (PARENTHESES)");
+      equation.clear();
+
+    else:
+      try:
+        combEquation = ''.join(equation);
+        combEquation = eval(combEquation);
+
+        combEquation = combEquation/100;
+
+        combEquation = str(combEquation);
+
+        screenDisplay.configure(text=combEquation);
+        equation.clear()
+        prevAns = str(combEquation);
+      except Exception:
+        equation.clear();
+        screenDisplay.configure(text="ERROR: SYNTAX")
+
+
+# same function as equalSign but square roots the final answer
+def squareRoot():
   global equation
   global prevAns
 
   if equation != []:
-    try:
-      combEquation = ''.join(equation);
-      combEquation = eval(combEquation);
 
-      combEquation = combEquation/100;
-
-      combEquation = str(combEquation);
-
-      screenDisplay.configure(text=combEquation);
-      equation.clear()
-      prevAns = str(combEquation);
-    except Exception:
+    # checks parenthesis capatability
+    leftCount = equation.count("(");
+    rightCount = equation.count(")");
+    if leftCount != rightCount:
+      screenDisplay.configure(text="ERROR: SYNTAX (PARENTHESES)");
       equation.clear();
-      screenDisplay.configure(text="ERROR: SYNTAX")
+
+    else:
+      try:
+        combEquation = ''.join(equation);
+        combEquation = eval(combEquation);
+
+        combEquation = sqrt(combEquation);
+
+        combEquation = str(combEquation);
+
+        screenDisplay.configure(text=combEquation);
+        equation.clear()
+        prevAns = str(combEquation);
+      except Exception:
+        equation.clear();
+        screenDisplay.configure(text="ERROR: SYNTAX")
 
 
+# establishes off button
 def offButton():
+
+  # checks state of button
   if buttonOff.cget("text") == "OFF":
     
     # changes button states
@@ -152,12 +224,13 @@ def offButton():
     buttonAns.configure(state="disabled")
     buttonClear.configure(state="disabled")
 
-    # changes word on power button
+    # changes state (word) of power button
     buttonOff.configure(text="ON")
 
-    # turns screen off
+    # turns screen "off"
     screenDisplay.configure(bg="black")
 
+  # checks state of button
   elif buttonOff.cget("text") == "ON":
 
     # changes button states
@@ -186,32 +259,22 @@ def offButton():
     buttonAns.configure(state="normal")
 
 
-    # changes word on power button
+    # changes state (word) of power button
     buttonOff.configure(text="OFF")
 
+    # turns screen "on"
     screenDisplay.configure(bg="#B9FFEE")
-  
 
-# same as equalSign but square roots the final answer
-def squareRoot():
-  global equation
+
+
+# extra functions
+
+# finds and displays answer to previous equation
+def answer():
   global prevAns
 
-  if equation != []:
-    try:
-      combEquation = ''.join(equation);
-      combEquation = eval(combEquation);
-
-      combEquation = sqrt(combEquation);
-
-      combEquation = str(combEquation);
-
-      screenDisplay.configure(text=combEquation);
-      equation.clear()
-      prevAns = str(combEquation);
-    except Exception:
-      equation.clear();
-      screenDisplay.configure(text="ERROR: SYNTAX")
+  equation.append(prevAns);
+  screenDisplay.configure(text=equation);
 
 # clears the existing display
 def clearDisplay():
@@ -220,24 +283,7 @@ def clearDisplay():
   equation.clear();
   screenDisplay.configure(text=equation);
 
-def answer():
-  global prevAns
 
-  equation.append(prevAns);
-  screenDisplay.configure(text=equation);
-
-def doubleZero():
-  equation.append("00");
-  screenDisplay.configure(text=equation);
-
-def leftParen():
-  equation.append("(");
-  screenDisplay.configure(text=equation);
-
-#################################################### add so it auto adds right at end of equation if not in it
-def rightParen():
-  equation.append(")");
-  screenDisplay.configure(text=equation);
 
 # configures number display
 screenDisplay = tk.Label(master=screenFrame, text=equation, anchor="e", fg="black", bg="#B9FFEE", width=25)
@@ -245,7 +291,8 @@ screenDisplay = tk.Label(master=screenFrame, text=equation, anchor="e", fg="blac
 screenDisplay.grid(row=0, column=1)
 
 
-# number buttons
+
+# creates number buttons
 button0 = tk.Button(master=numberFrame, text = "0", width = 3, height = 1, command = numZero);
 button1 = tk.Button(master=numberFrame, text = "1", width = 3, height = 1, command = numOne);
 button2 = tk.Button(master=numberFrame, text = "2", width = 3, height = 1, command = numTwo);
@@ -260,7 +307,7 @@ buttonDoubleZero = tk.Button(master = numberFrame, text="00", width = 3, height 
 buttonDecimal = tk.Button(master=numberFrame, text = ".", width = 3, height = 1, command = decimal)
 
 
-# operation buttons
+# creates operator buttons
 buttonAdd = tk.Button(master=numberFrame, text = "+", width = 3, height = 1, command = addSign);
 buttonEqual = tk.Button(master=numberFrame, text = "=", width = 3, height = 1, command = equalSign)
 buttonMinus = tk.Button(master=numberFrame, text = "-", width = 3, height = 1, command = minusSign)
@@ -275,7 +322,8 @@ buttonLeftParen = tk.Button(master=numberFrame, text = "(", width = 3, height = 
 buttonRightParen = tk.Button(master=numberFrame, text = ")", width = 3, height = 1, command = rightParen);
 
 
-# number button placements
+
+# places number buttons
 button1.grid(row=4, column=0, padx=(10,0), pady=(0,5));
 button2.grid(row=4, column=1, pady=(0,5));
 button3.grid(row=4, column=2, padx=(0,18), pady=(0,5));
@@ -289,7 +337,7 @@ button0.grid(row=5, column=0, padx=(10,0), pady=(0,10));
 buttonDecimal.grid(row=5, column=2, padx=(0,18), pady=(0,10));
 
 
-# operation button placements
+# places operator buttons
 buttonAdd.grid(row=1, column=3, padx=(0,10), pady=(0,5));
 buttonEqual.grid(row=5, column=3, padx=(0,10), pady=(0,5));
 buttonMinus.grid(row=2, column=3, padx=(0,10), pady=(0,5));
