@@ -195,6 +195,7 @@ def squareRoot():
 
 # establishes off button
 def offButton():
+  global prevAns
 
   # checks state of button
   if buttonOff.cget("text") == "OFF":
@@ -226,9 +227,11 @@ def offButton():
 
     # changes state (word) of power button
     buttonOff.configure(text="ON")
-
-    # turns screen "off"
-    screenDisplay.configure(bg="black")
+    
+    # turns screen "off" and clears previous display
+    equation.clear()
+    prevAns = "";
+    screenDisplay.configure(text=equation, bg="black")
 
   # checks state of button
   elif buttonOff.cget("text") == "ON":
@@ -273,8 +276,9 @@ def offButton():
 def answer():
   global prevAns
 
-  equation.append(prevAns);
-  screenDisplay.configure(text=equation);
+  if prevAns != "":
+    equation.append(prevAns);
+    screenDisplay.configure(text=equation);
 
 # clears the existing display
 def clearDisplay():
@@ -316,7 +320,7 @@ buttonDiv = tk.Button(master=numberFrame, text = "÷", width = 3, height = 1, co
 buttonPerc = tk.Button(master=numberFrame, text = "%", width = 3, height = 1, command = percentButton)
 buttonOff = tk.Button(master=numberFrame, text = "OFF", width = 3, height = 1, command = offButton)
 buttonSqrt = tk.Button(master=numberFrame, text = "√", width = 3, height = 1, command = squareRoot);
-buttonClear = tk.Button(master=numberFrame, text = "AC", width = 3, height = 1, command = clearDisplay);
+buttonClear = tk.Button(master=numberFrame, text = "C", width = 3, height = 1, command = clearDisplay);
 buttonAns = tk.Button(master=numberFrame, text = "ans", width = 3, height = 1, command = answer)
 buttonLeftParen = tk.Button(master=numberFrame, text = "(", width = 3, height = 1, command = leftParen)
 buttonRightParen = tk.Button(master=numberFrame, text = ")", width = 3, height = 1, command = rightParen);
