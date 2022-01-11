@@ -33,6 +33,15 @@ def numNine():
 def addSign():
   equation.append('+');
 
+def minusSign():
+  equation.append('-');
+
+def multSign():
+  equation.append('*');
+
+def divSign():
+  equation.append('/');
+
 def equalSign():
   try:
     combEquation = ''.join(equation);
@@ -57,6 +66,9 @@ button9 = tk.Button(window, text = "9", width = 3, height = 1, command = numNine
 # operations
 buttonAdd = tk.Button(window, text = "+", width = 3, height = 1, command = addSign);
 buttonEqual = tk.Button(window, text = "=", width = 3, height = 1, command = equalSign)
+buttonMinus = tk.Button(window, text = "-", width = 3, height = 1, command = minusSign)
+buttonMult = tk.Button(window, text = "×", width = 3, height = 1, command = multSign)
+buttonDiv = tk.Button(window, text = "÷", width = 3, height = 1, command = divSign)
 
 
 # numbers
@@ -72,8 +84,11 @@ button9.grid(row=2, column=2);
 button0.grid(row=3, column=1);
 
 # operations
-buttonAdd.grid(row=3, column=0);
-buttonEqual.grid(row=3, column=2);
+buttonAdd.grid(row=0, column=3);
+buttonEqual.grid(row=4, column=3);
+buttonMinus.grid(row=1, column=3);
+buttonMult.grid(row=2,column=3);
+buttonDiv.grid(row=3,column=3);
 
 
 window.mainloop();
