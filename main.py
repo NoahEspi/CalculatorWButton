@@ -85,51 +85,73 @@ def divSign():
   screenDisplay.configure(text=equation);
 
 def equalSign():
+  global equation
+  global prevAns
+
+  if equation != []:
+    try:
+      combEquation = ''.join(equation);
+      combEquation = eval(combEquation);
+
+      screenDisplay.configure(text=combEquation);
+      equation = combEquation;
+      prevAns = combEquation;
+    except SyntaxError:
+      equation.clear();
+      screenDisplay.configure(text="ERROR: SYNTAX")
+
+def percentButton():
+  global equation
+  global prevAns
+
+  if equation != []:
+    try:
+      combEquation = ''.join(equation);
+      combEquation = eval(combEquation);
+
+      combEquation = combEquation/100;
+
+      combEquation = str(combEquation);
+
+      screenDisplay.configure(text=combEquation);
+      equation = combEquation;
+      prevAns = combEquation;
+    except SyntaxError:
+      equation.clear();
+      screenDisplay.configure(text="ERROR: SYNTAX")
+
+def offButton():
+  window.destroy();
+
+def squareRoot():
+  global equation
   if equation != []:
     try:
       global prevAns
       combEquation = ''.join(equation);
       combEquation = eval(combEquation);
 
+      combEquation = sqrt(combEquation);
+
+      combEquation = str(combEquation);
+
       screenDisplay.configure(text=combEquation);
-      equation.clear();
+      equation = combEquation;
       prevAns = combEquation;
     except SyntaxError:
       equation.clear();
       screenDisplay.configure(text="ERROR: SYNTAX")
 
-def ansButton():
-  try:
-    global prevAns
-    equation.append(prevAns);
-    screenDisplay.configure(text=equation);
-  except NameError:
-    equation.clear();
-    screenDisplay.configure(text="ERROR: SYNTAX");
+def clearDisplay():
+  global equation 
 
-def offButton():
-  window.destroy();
-
-def squareRoot():
-    if equation != []:
-      try:
-        global prevAns
-        combEquation = ''.join(equation);
-        combEquation = eval(combEquation);
-
-        combEquation = sqrt(combEquation);
-
-        screenDisplay.configure(text=combEquation);
-        equation.clear();
-        prevAns = combEquation;
-      except SyntaxError:
-        equation.clear();
-        screenDisplay.configure(text="ERROR: SYNTAX")
-
-
+  equation = list(str(equation));
+  equation.clear();
+  screenDisplay.configure(text=equation);
+  
 
 # configures number display
-screenDisplay = tk.Label(master=screenFrame, text=equation, fg="white", bg="black", width=25)
+screenDisplay = tk.Label(master=screenFrame, text=equation, anchor="e", fg="white", bg="black", width=25)
 
 screenDisplay.grid(row=0, column=1)
 
@@ -154,9 +176,10 @@ buttonEqual = tk.Button(master=numberFrame, text = "=", width = 3, height = 1, c
 buttonMinus = tk.Button(master=numberFrame, text = "-", width = 3, height = 1, command = minusSign)
 buttonMult = tk.Button(master=numberFrame, text = "×", width = 3, height = 1, command = multSign)
 buttonDiv = tk.Button(master=numberFrame, text = "÷", width = 3, height = 1, command = divSign)
-buttonAns = tk.Button(master=numberFrame, text = "ans", width = 3, height = 1, command = ansButton)
+buttonPerc = tk.Button(master=numberFrame, text = "%", width = 3, height = 1, command = percentButton)
 buttonOff = tk.Button(master=numberFrame, text = "off", width = 3, height = 1, command = offButton)
 buttonSqrt = tk.Button(master=numberFrame, text = "√", width = 3, height = 1, command = squareRoot);
+buttonClear = tk.Button(master=numberFrame, text = "AC", width = 3, height = 1, command = clearDisplay);
 
 
 # number button placements
@@ -179,9 +202,11 @@ buttonEqual.grid(row=4, column=2, padx=(0,28), pady=(0,10));
 buttonMinus.grid(row=2, column=3, padx=(0,10), pady=(0,10));
 buttonMult.grid(row=3,column=3, padx=(0,10), pady=(0,10));
 buttonDiv.grid(row=4,column=3, padx=(0,10), pady=(0,10));
-buttonAns.grid(row=0, column=1, pady=(0,10));
+buttonPerc.grid(row=0, column=2, padx=(0,28), pady=(0,10));
 buttonOff.grid(row=0, column=0, padx=(10,0), pady=(0,10));
-buttonSqrt.grid(row=0, column=2, padx=(0,28), pady=(0,10))
+buttonSqrt.grid(row=0, column=1, pady=(0,10));
+buttonClear.grid(row=0, column=3, padx=(0,10), pady=(0,10));
+
 
 screenFrame.grid(row=0)
 numberFrame.grid(row=1)
