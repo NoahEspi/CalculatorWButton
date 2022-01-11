@@ -21,7 +21,8 @@ numberFrame = tk.Frame(window)
 
 equation = [];
 
-# numbers
+
+# number functions
 def numZero():
   equation.append('0');
   screenDisplay.configure(text=equation);
@@ -67,7 +68,7 @@ def decimal():
   screenDisplay.configure(text=equation);
 
 
-# operations
+# operation functions
 def addSign():
   equation.append('+');
   screenDisplay.configure(text=equation);
@@ -84,6 +85,7 @@ def divSign():
   equation.append('/');
   screenDisplay.configure(text=equation);
 
+# when button pushed, calculates existing equation
 def equalSign():
   global equation
   global prevAns
@@ -94,12 +96,13 @@ def equalSign():
       combEquation = eval(combEquation);
 
       screenDisplay.configure(text=combEquation);
-      equation = combEquation;
+      equation = list(str(combEquation));
       prevAns = combEquation;
     except SyntaxError:
       equation.clear();
       screenDisplay.configure(text="ERROR: SYNTAX")
 
+# same as equalSign, but divides the final answer by 100
 def percentButton():
   global equation
   global prevAns
@@ -114,15 +117,17 @@ def percentButton():
       combEquation = str(combEquation);
 
       screenDisplay.configure(text=combEquation);
-      equation = combEquation;
+      equation = list(str(combEquation));
       prevAns = combEquation;
     except SyntaxError:
       equation.clear();
       screenDisplay.configure(text="ERROR: SYNTAX")
 
+
 def offButton():
   window.destroy();
 
+# same as equalSign but square roots the final answer
 def squareRoot():
   global equation
   if equation != []:
@@ -136,16 +141,16 @@ def squareRoot():
       combEquation = str(combEquation);
 
       screenDisplay.configure(text=combEquation);
-      equation = combEquation;
+      equation = list(str(combEquation));
       prevAns = combEquation;
     except SyntaxError:
       equation.clear();
       screenDisplay.configure(text="ERROR: SYNTAX")
 
+# clears the existing display
 def clearDisplay():
   global equation 
 
-  equation = list(str(equation));
   equation.clear();
   screenDisplay.configure(text=equation);
   
@@ -183,31 +188,31 @@ buttonClear = tk.Button(master=numberFrame, text = "AC", width = 3, height = 1, 
 
 
 # number button placements
-button1.grid(row=3, column=0, padx=(10,0), pady=(0,10));
-button2.grid(row=3, column=1, pady=(0,10));
-button3.grid(row=3, column=2, padx=(0,28), pady=(0,10));
-button4.grid(row=2, column=0, padx=(10,0), pady=(0,10));
-button5.grid(row=2, column=1, pady=(0,10));
-button6.grid(row=2, column=2, padx=(0,28), pady=(0,10));
-button7.grid(row=1, column=0, padx=(10,0), pady=(0,10));
-button8.grid(row=1, column=1, pady=(0,10));
-button9.grid(row=1, column=2, padx=(0,28), pady=(0,10));
+button1.grid(row=3, column=0, padx=(10,0), pady=(0,5));
+button2.grid(row=3, column=1, pady=(0,5));
+button3.grid(row=3, column=2, padx=(0,18), pady=(0,5));
+button4.grid(row=2, column=0, padx=(10,0), pady=(0,5));
+button5.grid(row=2, column=1, pady=(0,5));
+button6.grid(row=2, column=2, padx=(0,18), pady=(0,5));
+button7.grid(row=1, column=0, padx=(10,0), pady=(0,5));
+button8.grid(row=1, column=1, pady=(0,5));
+button9.grid(row=1, column=2, padx=(0,18), pady=(0,5));
 button0.grid(row=4, column=0, padx=(10,0), pady=(0,10));
 buttonDecimal.grid(row=4, column=1, pady=(0,10));
 
 
 # operation button placements
-buttonAdd.grid(row=1, column=3, padx=(0,10), pady=(0,10));
-buttonEqual.grid(row=4, column=2, padx=(0,28), pady=(0,10));
-buttonMinus.grid(row=2, column=3, padx=(0,10), pady=(0,10));
-buttonMult.grid(row=3,column=3, padx=(0,10), pady=(0,10));
+buttonAdd.grid(row=1, column=3, padx=(0,10), pady=(0,5));
+buttonEqual.grid(row=4, column=2, padx=(0,18), pady=(0,10));
+buttonMinus.grid(row=2, column=3, padx=(0,10), pady=(0,5));
+buttonMult.grid(row=3,column=3, padx=(0,10), pady=(0,5));
 buttonDiv.grid(row=4,column=3, padx=(0,10), pady=(0,10));
-buttonPerc.grid(row=0, column=2, padx=(0,28), pady=(0,10));
-buttonOff.grid(row=0, column=0, padx=(10,0), pady=(0,10));
-buttonSqrt.grid(row=0, column=1, pady=(0,10));
-buttonClear.grid(row=0, column=3, padx=(0,10), pady=(0,10));
+buttonPerc.grid(row=0, column=2, padx=(0,18), pady=(0,5));
+buttonOff.grid(row=0, column=0, padx=(10,0), pady=(0,5));
+buttonSqrt.grid(row=0, column=1, pady=(0,5));
+buttonClear.grid(row=0, column=3, padx=(0,10), pady=(0,5));
 
-
+# frame placements
 screenFrame.grid(row=0)
 numberFrame.grid(row=1)
 
