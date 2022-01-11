@@ -1,7 +1,6 @@
 import tkinter as tk;
 import math; from math import sqrt
 
-# off, ans, ac, sqrt
 
 # window configuration
 window = tk.Tk();
@@ -12,6 +11,7 @@ window.rowconfigure(0, weight=1, minsize=50)
 window.title("Calcutator Fo Real")
 
 prevAns = "";
+
 
 # frame configurations
 screenFrame = tk.Frame(window, relief=tk.RAISED, borderwidth = 1)
@@ -96,9 +96,9 @@ def equalSign():
       combEquation = eval(combEquation);
 
       screenDisplay.configure(text=combEquation);
-      equation = list(str(combEquation));
-      prevAns = combEquation;
-    except SyntaxError:
+      equation.clear()
+      prevAns = str(combEquation);
+    except Exception:
       equation.clear();
       screenDisplay.configure(text="ERROR: SYNTAX")
 
@@ -117,22 +117,88 @@ def percentButton():
       combEquation = str(combEquation);
 
       screenDisplay.configure(text=combEquation);
-      equation = list(str(combEquation));
-      prevAns = combEquation;
-    except SyntaxError:
+      equation.clear()
+      prevAns = str(combEquation);
+    except Exception:
       equation.clear();
       screenDisplay.configure(text="ERROR: SYNTAX")
 
 
 def offButton():
-  window.destroy();
+  if buttonOff.cget("text") == "OFF":
+    
+    # changes button states
+    button0.configure(state="disabled")
+    button1.configure(state="disabled")
+    button2.configure(state="disabled")
+    button3.configure(state="disabled")
+    button4.configure(state="disabled")
+    button5.configure(state="disabled")
+    button6.configure(state="disabled")
+    button7.configure(state="disabled")
+    button8.configure(state="disabled")
+    button9.configure(state="disabled")
+    buttonDecimal.configure(state="disabled")
+    buttonAdd.configure(state="disabled")
+    buttonEqual.configure(state="disabled")
+    buttonMinus.configure(state="disabled")
+    buttonMult.configure(state="disabled")
+    buttonDiv.configure(state="disabled")
+    buttonPerc.configure(state="disabled")
+    buttonSqrt.configure(state="disabled")
+    buttonDoubleZero.configure(state="disabled")
+    buttonLeftParen.configure(state="disabled")
+    buttonRightParen.configure(state="disabled")
+    buttonAns.configure(state="disabled")
+    buttonClear.configure(state="disabled")
+
+    # changes word on power button
+    buttonOff.configure(text="ON")
+
+    # turns screen off
+    screenDisplay.configure(bg="black")
+
+  elif buttonOff.cget("text") == "ON":
+
+    # changes button states
+    button0.configure(state="normal")
+    button1.configure(state="normal")
+    button2.configure(state="normal")
+    button3.configure(state="normal")
+    button4.configure(state="normal")
+    button5.configure(state="normal")
+    button6.configure(state="normal")
+    button7.configure(state="normal")
+    button8.configure(state="normal")
+    button9.configure(state="normal")
+    buttonDecimal.configure(state="normal")
+    buttonAdd.configure(state="normal")
+    buttonEqual.configure(state="normal")
+    buttonMinus.configure(state="normal")
+    buttonMult.configure(state="normal")
+    buttonDiv.configure(state="normal")
+    buttonPerc.configure(state="normal")
+    buttonSqrt.configure(state="normal")
+    buttonClear.configure(state="normal")
+    buttonDoubleZero.configure(state="normal")
+    buttonRightParen.configure(state="normal")
+    buttonLeftParen.configure(state="normal")
+    buttonAns.configure(state="normal")
+
+
+    # changes word on power button
+    buttonOff.configure(text="OFF")
+
+    screenDisplay.configure(bg="#B9FFEE")
+  
 
 # same as equalSign but square roots the final answer
 def squareRoot():
   global equation
+  global prevAns
+
   if equation != []:
     try:
-      global prevAns
       combEquation = ''.join(equation);
       combEquation = eval(combEquation);
 
@@ -141,9 +207,9 @@ def squareRoot():
       combEquation = str(combEquation);
 
       screenDisplay.configure(text=combEquation);
-      equation = list(str(combEquation));
-      prevAns = combEquation;
-    except SyntaxError:
+      equation.clear()
+      prevAns = str(combEquation);
+    except Exception:
       equation.clear();
       screenDisplay.configure(text="ERROR: SYNTAX")
 
@@ -153,10 +219,28 @@ def clearDisplay():
 
   equation.clear();
   screenDisplay.configure(text=equation);
-  
+
+def answer():
+  global prevAns
+
+  equation.append(prevAns);
+  screenDisplay.configure(text=equation);
+
+def doubleZero():
+  equation.append("00");
+  screenDisplay.configure(text=equation);
+
+def leftParen():
+  equation.append("(");
+  screenDisplay.configure(text=equation);
+
+#################################################### add so it auto adds right at end of equation if not in it
+def rightParen():
+  equation.append(")");
+  screenDisplay.configure(text=equation);
 
 # configures number display
-screenDisplay = tk.Label(master=screenFrame, text=equation, anchor="e", fg="white", bg="black", width=25)
+screenDisplay = tk.Label(master=screenFrame, text=equation, anchor="e", fg="black", bg="#B9FFEE", width=25)
 
 screenDisplay.grid(row=0, column=1)
 
@@ -172,6 +256,7 @@ button6 = tk.Button(master=numberFrame, text = "6", width = 3, height = 1, comma
 button7 = tk.Button(master=numberFrame, text = "7", width = 3, height = 1, command = numSeven);
 button8 = tk.Button(master=numberFrame, text = "8", width = 3, height = 1, command = numEight);
 button9 = tk.Button(master=numberFrame, text = "9", width = 3, height = 1, command = numNine);
+buttonDoubleZero = tk.Button(master = numberFrame, text="00", width = 3, height = 1, command = doubleZero)
 buttonDecimal = tk.Button(master=numberFrame, text = ".", width = 3, height = 1, command = decimal)
 
 
@@ -182,35 +267,43 @@ buttonMinus = tk.Button(master=numberFrame, text = "-", width = 3, height = 1, c
 buttonMult = tk.Button(master=numberFrame, text = "×", width = 3, height = 1, command = multSign)
 buttonDiv = tk.Button(master=numberFrame, text = "÷", width = 3, height = 1, command = divSign)
 buttonPerc = tk.Button(master=numberFrame, text = "%", width = 3, height = 1, command = percentButton)
-buttonOff = tk.Button(master=numberFrame, text = "off", width = 3, height = 1, command = offButton)
+buttonOff = tk.Button(master=numberFrame, text = "OFF", width = 3, height = 1, command = offButton)
 buttonSqrt = tk.Button(master=numberFrame, text = "√", width = 3, height = 1, command = squareRoot);
 buttonClear = tk.Button(master=numberFrame, text = "AC", width = 3, height = 1, command = clearDisplay);
+buttonAns = tk.Button(master=numberFrame, text = "ans", width = 3, height = 1, command = answer)
+buttonLeftParen = tk.Button(master=numberFrame, text = "(", width = 3, height = 1, command = leftParen)
+buttonRightParen = tk.Button(master=numberFrame, text = ")", width = 3, height = 1, command = rightParen);
 
 
 # number button placements
-button1.grid(row=3, column=0, padx=(10,0), pady=(0,5));
-button2.grid(row=3, column=1, pady=(0,5));
-button3.grid(row=3, column=2, padx=(0,18), pady=(0,5));
-button4.grid(row=2, column=0, padx=(10,0), pady=(0,5));
-button5.grid(row=2, column=1, pady=(0,5));
-button6.grid(row=2, column=2, padx=(0,18), pady=(0,5));
-button7.grid(row=1, column=0, padx=(10,0), pady=(0,5));
-button8.grid(row=1, column=1, pady=(0,5));
-button9.grid(row=1, column=2, padx=(0,18), pady=(0,5));
-button0.grid(row=4, column=0, padx=(10,0), pady=(0,10));
-buttonDecimal.grid(row=4, column=1, pady=(0,10));
+button1.grid(row=4, column=0, padx=(10,0), pady=(0,5));
+button2.grid(row=4, column=1, pady=(0,5));
+button3.grid(row=4, column=2, padx=(0,18), pady=(0,5));
+button4.grid(row=3, column=0, padx=(10,0), pady=(0,5));
+button5.grid(row=3, column=1, pady=(0,5));
+button6.grid(row=3, column=2, padx=(0,18), pady=(0,5));
+button7.grid(row=2, column=0, padx=(10,0), pady=(0,5));
+button8.grid(row=2, column=1, pady=(0,5));
+button9.grid(row=2, column=2, padx=(0,18), pady=(0,5));
+button0.grid(row=5, column=0, padx=(10,0), pady=(0,10));
+buttonDecimal.grid(row=5, column=2, padx=(0,18), pady=(0,10));
 
 
 # operation button placements
 buttonAdd.grid(row=1, column=3, padx=(0,10), pady=(0,5));
-buttonEqual.grid(row=4, column=2, padx=(0,18), pady=(0,10));
+buttonEqual.grid(row=5, column=3, padx=(0,10), pady=(0,5));
 buttonMinus.grid(row=2, column=3, padx=(0,10), pady=(0,5));
 buttonMult.grid(row=3,column=3, padx=(0,10), pady=(0,5));
-buttonDiv.grid(row=4,column=3, padx=(0,10), pady=(0,10));
+buttonDiv.grid(row=4, column=3, padx=(0,10), pady=(0,5));
 buttonPerc.grid(row=0, column=2, padx=(0,18), pady=(0,5));
 buttonOff.grid(row=0, column=0, padx=(10,0), pady=(0,5));
 buttonSqrt.grid(row=0, column=1, pady=(0,5));
 buttonClear.grid(row=0, column=3, padx=(0,10), pady=(0,5));
+buttonDoubleZero.grid(row=5, column=1, pady=(0,10));
+buttonLeftParen.grid(row=1, column=1, pady=(0,5));
+buttonRightParen.grid(row=1, column=2, padx=(0,18), pady=(0,5));
+buttonAns.grid(row=1, column=0, padx=(10,0), pady=(0,5));
+
 
 # frame placements
 screenFrame.grid(row=0)
