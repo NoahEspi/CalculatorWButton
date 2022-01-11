@@ -28,6 +28,8 @@ def numEight():
   equation.append('8');
 def numNine():
   equation.append('9');
+def decimal():
+  equation.append('.');
 
 # operations
 def addSign():
@@ -51,6 +53,11 @@ def equalSign():
   except SyntaxError:
     equation.clear();
 
+
+screenDisplay = tk.Label(text=equation)
+
+screenDisplay
+
 # numbers
 button0 = tk.Button(window, text = "0", width = 3, height = 1, command = numZero);
 button1 = tk.Button(window, text = "1", width = 3, height = 1, command = numOne);
@@ -62,6 +69,7 @@ button6 = tk.Button(window, text = "6", width = 3, height = 1, command = numSix)
 button7 = tk.Button(window, text = "7", width = 3, height = 1, command = numSeven);
 button8 = tk.Button(window, text = "8", width = 3, height = 1, command = numEight);
 button9 = tk.Button(window, text = "9", width = 3, height = 1, command = numNine);
+buttonDecimal = tk.Button(window, text = ".", width = 3, height = 1, command = decimal)
 
 # operations
 buttonAdd = tk.Button(window, text = "+", width = 3, height = 1, command = addSign);
@@ -72,23 +80,24 @@ buttonDiv = tk.Button(window, text = "÷", width = 3, height = 1, command = divS
 
 
 # numbers
-button1.grid(row=0, column=0)
-button2.grid(row=0, column=1);
-button3.grid(row=0, column=2);
-button4.grid(row=1, column=0);
-button5.grid(row=1, column=1);
-button6.grid(row=1, column=2);
-button7.grid(row=2, column=0);
-button8.grid(row=2, column=1);
-button9.grid(row=2, column=2);
-button0.grid(row=3, column=1);
+button1.grid(row=1, column=0)
+button2.grid(row=1, column=1);
+button3.grid(row=1, column=2);
+button4.grid(row=2, column=0);
+button5.grid(row=2, column=1);
+button6.grid(row=2, column=2);
+button7.grid(row=3, column=0);
+button8.grid(row=3, column=1);
+button9.grid(row=3, column=2);
+button0.grid(row=4, column=0);
+buttonDecimal.grid(row=4, column=1);
 
 # operations
-buttonAdd.grid(row=0, column=3);
-buttonEqual.grid(row=4, column=3);
-buttonMinus.grid(row=1, column=3);
-buttonMult.grid(row=2,column=3);
-buttonDiv.grid(row=3,column=3);
+buttonAdd.grid(row=1, column=3);
+buttonEqual.grid(row=4, column=2);
+buttonMinus.grid(row=2, column=3);
+buttonMult.grid(row=3,column=3);
+buttonDiv.grid(row=4,column=3);
 
 
 window.mainloop();
