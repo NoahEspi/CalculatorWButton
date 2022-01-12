@@ -1,9 +1,8 @@
 import tkinter as tk;
-import math; from math import sqrt
+import math; from math import sin, cos, tan
 import time
 import warnings
 import re
-
 
 warnings.filterwarnings('ignore')
 
@@ -130,6 +129,20 @@ def rightParen():
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
+def sine():
+  equation.append("sin(");
+  screenDisplay.configure(text=''.join(equation));
+  buttonClear.configure(text="C");
+
+def cosine():
+  equation.append("cos(");
+  screenDisplay.configure(text=''.join(equation));
+  buttonClear.configure(text="C");
+
+def tangent():
+  equation.append("tan(");
+  screenDisplay.configure(text=''.join(equation));
+  buttonClear.configure(text="C");
 
 
 # calculation functions
@@ -141,17 +154,75 @@ def equalSign():
 
   # checks if equation is empty
   if equation != []:
+    
+    leftPCount = str(equation).count("(")
+    rightPCount = str(equation).count(")")
+    
+    if leftPCount > rightPCount:
+      equation.append(")")
 
     try:
 
       combEquation = ''.join(equation);
-      combEquation = eval(re.sub(r"((?<=^)|(?<=[^\.\d]))0+(\d+)", r"\1\2", str(combEquation)));
 
-      screenDisplay.configure(text=combEquation);
+      if "cos(" in combEquation:
+        
+        cosCount = equation.count("cos(");
+        
+        print(cosCount);
+        
+        for i in range(cosCount):
+          cosLoc = equation.index("cos(");
+
+          equation = ''.join(equation)
+
+          equation = equation[0:cosLoc] + "cos(math.degrees(" + equation[cosLoc+4] + ")" + equation[cosLoc+5:];
+
+          combEquation = ''.join(equation);
+
+          combEquation = eval(str(combEquation));
+
+      combEquation = ''.join(equation)
+
+      if "sin(" in combEquation:
+
+        sinLoc = equation.index("sin(");
+
+        equation = ''.join(equation)
+
+        equation = equation[0:sinLoc] + "sin(math.degrees(" + equation[sinLoc+4] + ")" + equation[sinLoc+5:];
+
+
+        combEquation = ''.join(equation);
+
+        combEquation = eval(str(combEquation))
+
+      combEquation = ''.join(equation)
+
+      if "tan(" in combEquation:
+
+        tanLoc = equation.index("tan(");
+
+        equation = ''.join(equation)
+
+        equation = equation[0:tanLoc] + "tan(math.degrees(" + equation[tanLoc+4] + ")" + equation[tanLoc+5:];
+
+
+        combEquation = ''.join(equation);
+
+        combEquation = eval(str(combEquation));
+
+
+      if not "tan(" in equation or not "sin(" in equation or not "cos(" in equation:
+        combEquation = eval(re.sub(r"((?<=^)|(?<=[^\.\d]))0+(\d+)", r"\1\2", str(combEquation)));
+
+      screenDisplay.configure(text=str(combEquation));
+      equation = list(equation)
       equation.clear()
       prevAns = str(combEquation);
 
     except Exception:
+      equation = list(equation)
       equation.clear();
       screenDisplay.configure(text="ERROR: SYNTAX")
 
@@ -189,7 +260,7 @@ def squareRoot():
       combEquation = ''.join(equation);
       combEquation = eval(re.sub(r"((?<=^)|(?<=[^\.\d]))0+(\d+)", r"\1\2", str(combEquation)));
 
-      combEquation = sqrt(combEquation);
+      combEquation = math.sqrt(combEquation);
 
       combEquation = str(combEquation);
 
@@ -324,9 +395,9 @@ buttonRightParen = tk.Button(master=numberFrame, text = ")", width = 3, height =
 
 buttonBack = tk.Button(master=screenFrame, height = 1, width = 1, text="⌫", command=backspace)
 
-btnCos = tk.Button(master=numberFrame, text="cos", width=3, height=1)
-btnSin = tk.Button(master=numberFrame, text="sin", width=3, height=1)
-btnTan = tk.Button(master=numberFrame, text="tan", width=3, height=1)
+btnCos = tk.Button(master=numberFrame, text="cos", width=3, height=1, command=cosine)
+btnSin = tk.Button(master=numberFrame, text="sin", width=3, height=1, command=sine)
+btnTan = tk.Button(master=numberFrame, text="tan", width=3, height=1, command=tangent)
 
 btnSec = tk.Button(master=numberFrame, text="2nd",width=3, height=1, bg="#0CC717", fg="white")
 
