@@ -194,11 +194,11 @@ def squareRoot():
       combEquation = str(combEquation);
 
       screenDisplay.configure(text=combEquation);
-      equation.clear()
+      equation.clear();
       prevAns = str(combEquation);
     except Exception:
       equation.clear();
-      screenDisplay.configure(text="ERROR: SYNTAX")
+      screenDisplay.configure(text="ERROR: SYNTAX");
 
 
 # establishes off button
@@ -308,7 +308,7 @@ buttonMinus = tk.Button(master=numberFrame, text = "-", width = 3, height = 1, c
 buttonMult = tk.Button(master=numberFrame, text = "×", width = 3, height = 1, command = multSign)
 buttonDiv = tk.Button(master=numberFrame, text = "÷", width = 3, height = 1, command = divSign)
 buttonPerc = tk.Button(master=numberFrame, text = "%", width = 3, height = 1, command = percentButton)
-buttonOff = tk.Button(master=numberFrame, text = "OFF", width = 3, height = 1, command = offButton)
+buttonOff = tk.Button(master=numberFrame, text = "OFF", width = 3, height = 1, bg="red", fg="white", command = offButton)
 buttonSqrt = tk.Button(master=numberFrame, text = "√", width = 3, height = 1, command = squareRoot);
 buttonClear = tk.Button(master=numberFrame, text = "AC", width = 3, height = 1, command = clearDisplay);
 buttonAns = tk.Button(master=numberFrame, text = "ans", width = 3, height = 1, command = answer)
