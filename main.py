@@ -2,7 +2,6 @@ import tkinter as tk;
 import math; from math import sqrt
 import time
 
-
 # window configuration
 window = tk.Tk();
 
@@ -32,52 +31,52 @@ screenDisplay.grid(row=0, column=1)
 
 
 # creates number functions
-def numZero():
+def btn0():
   equation.append('0');
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
-def numOne():
+def btn1():
   equation.append('1');
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
-def numTwo():
+def btn2():
   equation.append('2');
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
-def numThree():
+def btn3():
   equation.append('3');
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
-def numFour():
+def btn4():
   equation.append('4');
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
-def numFive():
+def btn5():
   equation.append('5');
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
-def numSix():
+def btn6():
   equation.append('6');
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
-def numSeven():
+def btn7():
   equation.append('7');
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
-def numEight():
+def btn8():
   equation.append('8');
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
-def numNine():
+def btn9():
   equation.append('9');
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
@@ -124,6 +123,7 @@ def rightParen():
   equation.append(")");
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
+
 
 
 # calculation functions
@@ -197,35 +197,15 @@ def squareRoot():
 # establishes off button
 def offButton():
   global prevAns
+  global buttonNames
 
   # checks state of button
   if buttonOff.cget("text") == "OFF":
-    
-    # changes button states
-    button0.configure(state="disabled")
-    button1.configure(state="disabled")
-    button2.configure(state="disabled")
-    button3.configure(state="disabled")
-    button4.configure(state="disabled")
-    button5.configure(state="disabled")
-    button6.configure(state="disabled")
-    button7.configure(state="disabled")
-    button8.configure(state="disabled")
-    button9.configure(state="disabled")
-    buttonDecimal.configure(state="disabled")
-    buttonAdd.configure(state="disabled")
-    buttonEqual.configure(state="disabled")
-    buttonMinus.configure(state="disabled")
-    buttonMult.configure(state="disabled")
-    buttonDiv.configure(state="disabled")
-    buttonPerc.configure(state="disabled")
-    buttonSqrt.configure(state="disabled")
-    buttonDoubleZero.configure(state="disabled")
-    buttonLeftParen.configure(state="disabled")
-    buttonRightParen.configure(state="disabled")
-    buttonAns.configure(state="disabled")
-    buttonClear.configure(state="disabled")
 
+    # changes button states
+    for b in buttonNames:
+      b.configure(state="disabled");
+    
     # changes state (word) of power button
     buttonOff.configure(text="ON")
     
@@ -241,30 +221,8 @@ def offButton():
   elif buttonOff.cget("text") == "ON":
 
     # changes button states
-    button0.configure(state="normal")
-    button1.configure(state="normal")
-    button2.configure(state="normal")
-    button3.configure(state="normal")
-    button4.configure(state="normal")
-    button5.configure(state="normal")
-    button6.configure(state="normal")
-    button7.configure(state="normal")
-    button8.configure(state="normal")
-    button9.configure(state="normal")
-    buttonDecimal.configure(state="normal")
-    buttonAdd.configure(state="normal")
-    buttonEqual.configure(state="normal")
-    buttonMinus.configure(state="normal")
-    buttonMult.configure(state="normal")
-    buttonDiv.configure(state="normal")
-    buttonPerc.configure(state="normal")
-    buttonSqrt.configure(state="normal")
-    buttonClear.configure(state="normal")
-    buttonDoubleZero.configure(state="normal")
-    buttonRightParen.configure(state="normal")
-    buttonLeftParen.configure(state="normal")
-    buttonAns.configure(state="normal")
-
+    for b in buttonNames:
+      b.configure(state="normal")
 
     # changes state (word) of power button
     buttonOff.configure(text="OFF")
@@ -322,16 +280,16 @@ def clearDisplay():
 
 
 # creates number buttons
-button0 = tk.Button(master=numberFrame, text = "0", width = 3, height = 1, command = numZero);
-button1 = tk.Button(master=numberFrame, text = "1", width = 3, height = 1, command = numOne);
-button2 = tk.Button(master=numberFrame, text = "2", width = 3, height = 1, command = numTwo);
-button3 = tk.Button(master=numberFrame, text = "3", width = 3, height = 1, command = numThree);
-button4 = tk.Button(master=numberFrame, text = "4", width = 3, height = 1, command = numFour);
-button5 = tk.Button(master=numberFrame, text = "5", width = 3, height = 1, command = numFive);
-button6 = tk.Button(master=numberFrame, text = "6", width = 3, height = 1, command = numSix);
-button7 = tk.Button(master=numberFrame, text = "7", width = 3, height = 1, command = numSeven);
-button8 = tk.Button(master=numberFrame, text = "8", width = 3, height = 1, command = numEight);
-button9 = tk.Button(master=numberFrame, text = "9", width = 3, height = 1, command = numNine);
+btn0 = tk.Button(master=numberFrame, text = "0", width = 3, height = 1, command = btn0);
+btn1 = tk.Button(master=numberFrame, text = "1", width = 3, height = 1, command = btn1);
+btn2 = tk.Button(master=numberFrame, text = "2", width = 3, height = 1, command = btn2);
+btn3 = tk.Button(master=numberFrame, text = "3", width = 3, height = 1, command = btn3);
+btn4 = tk.Button(master=numberFrame, text = "4", width = 3, height = 1, command = btn4);
+btn5 = tk.Button(master=numberFrame, text = "5", width = 3, height = 1, command = btn5);
+btn6 = tk.Button(master=numberFrame, text = "6", width = 3, height = 1, command = btn6);
+btn7 = tk.Button(master=numberFrame, text = "7", width = 3, height = 1, command = btn7);
+btn8 = tk.Button(master=numberFrame, text = "8", width = 3, height = 1, command = btn8);
+btn9 = tk.Button(master=numberFrame, text = "9", width = 3, height = 1, command = btn9);
 buttonDoubleZero = tk.Button(master = numberFrame, text="00", width = 3, height = 1, command = doubleZero)
 buttonDecimal = tk.Button(master=numberFrame, text = ".", width = 3, height = 1, command = decimal)
 
@@ -354,16 +312,16 @@ buttonBack = tk.Button(master=screenFrame, height = 1, width = 1, text="⌫", co
 
 
 # places number buttons
-button1.grid(row=4, column=0, padx=(10,0), pady=(0,5));
-button2.grid(row=4, column=1, pady=(0,5));
-button3.grid(row=4, column=2, padx=(0,18), pady=(0,5));
-button4.grid(row=3, column=0, padx=(10,0), pady=(0,5));
-button5.grid(row=3, column=1, pady=(0,5));
-button6.grid(row=3, column=2, padx=(0,18), pady=(0,5));
-button7.grid(row=2, column=0, padx=(10,0), pady=(0,5));
-button8.grid(row=2, column=1, pady=(0,5));
-button9.grid(row=2, column=2, padx=(0,18), pady=(0,5));
-button0.grid(row=5, column=0, padx=(10,0), pady=(0,10));
+btn1.grid(row=4, column=0, padx=(10,0), pady=(0,5));
+btn2.grid(row=4, column=1, pady=(0,5));
+btn3.grid(row=4, column=2, padx=(0,18), pady=(0,5));
+btn4.grid(row=3, column=0, padx=(10,0), pady=(0,5));
+btn5.grid(row=3, column=1, pady=(0,5));
+btn6.grid(row=3, column=2, padx=(0,18), pady=(0,5));
+btn7.grid(row=2, column=0, padx=(10,0), pady=(0,5));
+btn8.grid(row=2, column=1, pady=(0,5));
+btn9.grid(row=2, column=2, padx=(0,18), pady=(0,5));
+btn0.grid(row=5, column=0, padx=(10,0), pady=(0,10));
 buttonDecimal.grid(row=5, column=2, padx=(0,18), pady=(0,10));
 
 
@@ -389,6 +347,7 @@ buttonBack.grid(row=0, column = 5)
 screenFrame.grid(row=0)
 numberFrame.grid(row=1)
 
-
+# keeps a list of button names
+buttonNames = [btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,buttonDecimal,buttonAdd,buttonEqual,buttonMinus,buttonMult,buttonDiv,buttonPerc,buttonSqrt,buttonDoubleZero,buttonLeftParen,buttonRightParen,buttonAns,buttonClear, buttonBack]
 
 window.mainloop();
