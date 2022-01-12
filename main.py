@@ -1,6 +1,11 @@
 import tkinter as tk;
 import math; from math import sqrt
 import time
+import warnings
+import re
+
+
+warnings.filterwarnings('ignore')
 
 # window configuration
 window = tk.Tk();
@@ -16,6 +21,7 @@ window.title("Calcutator Fo Real")
 screenFrame = tk.Frame(window, borderwidth = 1)
 
 numberFrame = tk.Frame(window)
+
 
 # establishes variables
 equation = [];
@@ -139,11 +145,12 @@ def equalSign():
     try:
 
       combEquation = ''.join(equation);
-      combEquation = eval(combEquation);
+      combEquation = eval(re.sub(r"((?<=^)|(?<=[^\.\d]))0+(\d+)", r"\1\2", str(combEquation)));
 
       screenDisplay.configure(text=combEquation);
       equation.clear()
       prevAns = str(combEquation);
+
     except Exception:
       equation.clear();
       screenDisplay.configure(text="ERROR: SYNTAX")
@@ -158,7 +165,7 @@ def percentButton():
 
     try:
       combEquation = ''.join(equation);
-      combEquation = eval(combEquation);
+      combEquation = eval(re.sub(r"((?<=^)|(?<=[^\.\d]))0+(\d+)", r"\1\2", str(combEquation)));
 
       combEquation = combEquation/100;
 
@@ -180,7 +187,7 @@ def squareRoot():
   if equation != []:
     try:
       combEquation = ''.join(equation);
-      combEquation = eval(combEquation);
+      combEquation = eval(re.sub(r"((?<=^)|(?<=[^\.\d]))0+(\d+)", r"\1\2", str(combEquation)));
 
       combEquation = sqrt(combEquation);
 
@@ -347,7 +354,9 @@ buttonBack.grid(row=0, column = 5)
 screenFrame.grid(row=0)
 numberFrame.grid(row=1)
 
+
 # keeps a list of button names
 buttonNames = [btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,buttonDecimal,buttonAdd,buttonEqual,buttonMinus,buttonMult,buttonDiv,buttonPerc,buttonSqrt,buttonDoubleZero,buttonLeftParen,buttonRightParen,buttonAns,buttonClear, buttonBack]
+
 
 window.mainloop();
