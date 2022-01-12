@@ -127,26 +127,18 @@ def equalSign():
 
   # checks if equation is empty
   if equation != []:
-    
-    # checks parenthesis capatability
-    leftCount = equation.count("(");
-    rightCount = equation.count(")");
-    if leftCount != rightCount:
-      screenDisplay.configure(text="ERROR: SYNTAX (PARENTHESES)");
+
+    try:
+      
+      combEquation = ''.join(equation);
+      combEquation = eval(combEquation);
+
+      screenDisplay.configure(text=combEquation);
+      equation.clear()
+      prevAns = str(combEquation);
+    except Exception:
       equation.clear();
-
-    else:
-      try:
-        
-        combEquation = ''.join(equation);
-        combEquation = eval(combEquation);
-
-        screenDisplay.configure(text=combEquation);
-        equation.clear()
-        prevAns = str(combEquation);
-      except Exception:
-        equation.clear();
-        screenDisplay.configure(text="ERROR: SYNTAX")
+      screenDisplay.configure(text="ERROR: SYNTAX")
 
 
 # same function as equalSign except divides the answer by 100
@@ -156,28 +148,20 @@ def percentButton():
   
   if equation != []:
 
-    # checks parenthesis capatability
-    leftCount = equation.count("(");
-    rightCount = equation.count(")");
-    if leftCount != rightCount:
-      screenDisplay.configure(text="ERROR: SYNTAX (PARENTHESES)");
+    try:
+      combEquation = ''.join(equation);
+      combEquation = eval(combEquation);
+
+      combEquation = combEquation/100;
+
+      combEquation = str(combEquation);
+
+      screenDisplay.configure(text=combEquation);
+      equation.clear()
+      prevAns = str(combEquation);
+    except Exception:
       equation.clear();
-
-    else:
-      try:
-        combEquation = ''.join(equation);
-        combEquation = eval(combEquation);
-
-        combEquation = combEquation/100;
-
-        combEquation = str(combEquation);
-
-        screenDisplay.configure(text=combEquation);
-        equation.clear()
-        prevAns = str(combEquation);
-      except Exception:
-        equation.clear();
-        screenDisplay.configure(text="ERROR: SYNTAX")
+      screenDisplay.configure(text="ERROR: SYNTAX")
 
 
 # same function as equalSign but square roots the final answer
@@ -186,29 +170,20 @@ def squareRoot():
   global prevAns
 
   if equation != []:
+    try:
+      combEquation = ''.join(equation);
+      combEquation = eval(combEquation);
 
-    # checks parenthesis capatability
-    leftCount = equation.count("(");
-    rightCount = equation.count(")");
-    if leftCount != rightCount:
-      screenDisplay.configure(text="ERROR: SYNTAX (PARENTHESES)");
+      combEquation = sqrt(combEquation);
+
+      combEquation = str(combEquation);
+
+      screenDisplay.configure(text=combEquation);
+      equation.clear()
+      prevAns = str(combEquation);
+    except Exception:
       equation.clear();
-
-    else:
-      try:
-        combEquation = ''.join(equation);
-        combEquation = eval(combEquation);
-
-        combEquation = sqrt(combEquation);
-
-        combEquation = str(combEquation);
-
-        screenDisplay.configure(text=combEquation);
-        equation.clear()
-        prevAns = str(combEquation);
-      except Exception:
-        equation.clear();
-        screenDisplay.configure(text="ERROR: SYNTAX")
+      screenDisplay.configure(text="ERROR: SYNTAX")
 
 
 # establishes off button
@@ -246,6 +221,9 @@ def offButton():
     # changes state (word) of power button
     buttonOff.configure(text="ON")
     
+    # changes state of clear button
+    buttonClear.configure(text="AC")
+
     # turns screen "off" and clears previous display
     equation.clear()
     prevAns = "";
@@ -308,13 +286,11 @@ def clearDisplay():
     buttonClear.configure(text="AC")
     equation.clear();
     screenDisplay.configure(text=equation);
-    print("C working properly")
 
   elif buttonClear.cget("text") == "AC":
     prevAns = ""
     equation.clear();
     screenDisplay.configure(text=equation);
-    print("ac working properly")
 
 
 
