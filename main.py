@@ -1,5 +1,6 @@
 import tkinter as tk;
 import math; from math import sqrt
+import time
 
 
 # window configuration
@@ -26,50 +27,62 @@ prevAns = "";
 def numZero():
   equation.append('0');
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 def numOne():
   equation.append('1');
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 def numTwo():
   equation.append('2');
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 def numThree():
   equation.append('3');
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 def numFour():
   equation.append('4');
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 def numFive():
   equation.append('5');
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 def numSix():
   equation.append('6');
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 def numSeven():
   equation.append('7');
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 def numEight():
   equation.append('8');
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 def numNine():
   equation.append('9');
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 def doubleZero():
   equation.append("00");
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 def decimal():
   equation.append('.');
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 
 
@@ -77,27 +90,32 @@ def decimal():
 def addSign():
   equation.append('+');
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 def minusSign():
   equation.append('-');
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 def multSign():
   equation.append('*');
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 def divSign():
   equation.append('/');
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 def leftParen():
   equation.append("(");
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
-#################################################### add so it auto adds right at end of equation if not in it
 def rightParen():
   equation.append(")");
   screenDisplay.configure(text=equation);
+  buttonClear.configure(text="C");
 
 
 # calculation functions
@@ -279,13 +297,24 @@ def answer():
   if prevAns != "":
     equation.append(prevAns);
     screenDisplay.configure(text=equation);
+    buttonClear.configure(text="C");
 
 # clears the existing display
 def clearDisplay():
-  global equation 
+  global equation
+  global prevAns
 
-  equation.clear();
-  screenDisplay.configure(text=equation);
+  if buttonClear.cget("text") == "C":
+    buttonClear.configure(text="AC")
+    equation.clear();
+    screenDisplay.configure(text=equation);
+    print("C working properly")
+
+  elif buttonClear.cget("text") == "AC":
+    prevAns = ""
+    equation.clear();
+    screenDisplay.configure(text=equation);
+    print("ac working properly")
 
 
 
@@ -320,7 +349,7 @@ buttonDiv = tk.Button(master=numberFrame, text = "÷", width = 3, height = 1, co
 buttonPerc = tk.Button(master=numberFrame, text = "%", width = 3, height = 1, command = percentButton)
 buttonOff = tk.Button(master=numberFrame, text = "OFF", width = 3, height = 1, command = offButton)
 buttonSqrt = tk.Button(master=numberFrame, text = "√", width = 3, height = 1, command = squareRoot);
-buttonClear = tk.Button(master=numberFrame, text = "C", width = 3, height = 1, command = clearDisplay);
+buttonClear = tk.Button(master=numberFrame, text = "AC", width = 3, height = 1, command = clearDisplay);
 buttonAns = tk.Button(master=numberFrame, text = "ans", width = 3, height = 1, command = answer)
 buttonLeftParen = tk.Button(master=numberFrame, text = "(", width = 3, height = 1, command = leftParen)
 buttonRightParen = tk.Button(master=numberFrame, text = ")", width = 3, height = 1, command = rightParen);
