@@ -12,6 +12,7 @@ window.rowconfigure(0, weight=1, minsize=50)
 window.title("Calcutator Fo Real")
 
 
+
 # frame configurations
 screenFrame = tk.Frame(window, relief=tk.RAISED, borderwidth = 1)
 
@@ -23,65 +24,72 @@ prevAns = "";
 
 
 
+# configures number display
+screenDisplay = tk.Label(master=screenFrame, text=equation, anchor="e", fg="black", bg="#B9FFEE", width=22)
+
+screenDisplay.grid(row=0, column=1)
+
+
+
 # creates number functions
 def numZero():
   equation.append('0');
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def numOne():
   equation.append('1');
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def numTwo():
   equation.append('2');
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def numThree():
   equation.append('3');
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def numFour():
   equation.append('4');
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def numFive():
   equation.append('5');
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def numSix():
   equation.append('6');
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def numSeven():
   equation.append('7');
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def numEight():
   equation.append('8');
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def numNine():
   equation.append('9');
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def doubleZero():
   equation.append("00");
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def decimal():
   equation.append('.');
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 
@@ -89,32 +97,32 @@ def decimal():
 # creates operator functions
 def addSign():
   equation.append('+');
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def minusSign():
   equation.append('-');
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def multSign():
   equation.append('*');
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def divSign():
   equation.append('/');
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def leftParen():
   equation.append("(");
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def rightParen():
   equation.append(")");
-  screenDisplay.configure(text=equation);
+  screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 
@@ -129,7 +137,7 @@ def equalSign():
   if equation != []:
 
     try:
-      
+
       combEquation = ''.join(equation);
       combEquation = eval(combEquation);
 
@@ -274,8 +282,27 @@ def answer():
 
   if prevAns != "":
     equation.append(prevAns);
-    screenDisplay.configure(text=equation);
+    screenDisplay.configure(text=''.join(equation));
     buttonClear.configure(text="C");
+
+def backspace():
+  global equation
+
+  try:
+
+    # combines equation into a string and puts each individual char into a list
+    equation = ''.join(equation)
+    equation = list(equation)
+
+    # removes last char of equation
+    equation.pop();
+
+
+    screenDisplay.configure(text=''.join(equation));
+
+  except IndexError:
+    pass
+  
 
 # clears the existing display
 def clearDisplay():
@@ -285,19 +312,12 @@ def clearDisplay():
   if buttonClear.cget("text") == "C":
     buttonClear.configure(text="AC")
     equation.clear();
-    screenDisplay.configure(text=equation);
+    screenDisplay.configure(text=''.join(equation));
 
   elif buttonClear.cget("text") == "AC":
     prevAns = ""
     equation.clear();
-    screenDisplay.configure(text=equation);
-
-
-
-# configures number display
-screenDisplay = tk.Label(master=screenFrame, text=equation, anchor="e", fg="black", bg="#B9FFEE", width=25)
-
-screenDisplay.grid(row=0, column=1)
+    screenDisplay.configure(text=''.join(equation));
 
 
 
@@ -329,6 +349,7 @@ buttonClear = tk.Button(master=numberFrame, text = "AC", width = 3, height = 1, 
 buttonAns = tk.Button(master=numberFrame, text = "ans", width = 3, height = 1, command = answer)
 buttonLeftParen = tk.Button(master=numberFrame, text = "(", width = 3, height = 1, command = leftParen)
 buttonRightParen = tk.Button(master=numberFrame, text = ")", width = 3, height = 1, command = rightParen);
+buttonBack = tk.Button(master=screenFrame, height = 1, width = 1, text="⌫", command=backspace)
 
 
 
@@ -360,11 +381,14 @@ buttonDoubleZero.grid(row=5, column=1, pady=(0,10));
 buttonLeftParen.grid(row=1, column=1, pady=(0,5));
 buttonRightParen.grid(row=1, column=2, padx=(0,18), pady=(0,5));
 buttonAns.grid(row=1, column=0, padx=(10,0), pady=(0,5));
+buttonBack.grid(row=0, column = 5)
+
 
 
 # frame placements
 screenFrame.grid(row=0)
 numberFrame.grid(row=1)
+
 
 
 window.mainloop();
