@@ -13,7 +13,7 @@ window.title("Calcutator Fo Real")
 
 
 # frame configurations
-screenFrame = tk.Frame(window, relief=tk.RAISED, borderwidth = 1)
+screenFrame = tk.Frame(window, borderwidth = 1)
 
 numberFrame = tk.Frame(window)
 
@@ -24,7 +24,7 @@ prevAns = "";
 
 
 # configures number display
-screenDisplay = tk.Label(master=screenFrame, text=equation, anchor="e", fg="black", bg="#B9FFEE", width=22)
+screenDisplay = tk.Label(master=screenFrame, text=equation, relief = tk.SUNKEN, borderwidth=4, anchor="e", fg="black", bg="#B9FFEE", width=22)
 
 screenDisplay.grid(row=0, column=1)
 
