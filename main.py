@@ -298,6 +298,7 @@ btn7 = tk.Button(master=numberFrame, text = "7", width = 3, height = 1, command 
 btn8 = tk.Button(master=numberFrame, text = "8", width = 3, height = 1, command = btn8);
 btn9 = tk.Button(master=numberFrame, text = "9", width = 3, height = 1, command = btn9);
 buttonDoubleZero = tk.Button(master = numberFrame, text="00", width = 3, height = 1, command = doubleZero)
+
 buttonDecimal = tk.Button(master=numberFrame, text = ".", width = 3, height = 1, command = decimal)
 
 
@@ -307,47 +308,71 @@ buttonEqual = tk.Button(master=numberFrame, text = "=", width = 3, height = 1, c
 buttonMinus = tk.Button(master=numberFrame, text = "-", width = 3, height = 1, command = minusSign)
 buttonMult = tk.Button(master=numberFrame, text = "×", width = 3, height = 1, command = multSign)
 buttonDiv = tk.Button(master=numberFrame, text = "÷", width = 3, height = 1, command = divSign)
+
 buttonPerc = tk.Button(master=numberFrame, text = "%", width = 3, height = 1, command = percentButton)
+
 buttonOff = tk.Button(master=numberFrame, text = "OFF", width = 3, height = 1, bg="red", fg="white", command = offButton)
+
 buttonSqrt = tk.Button(master=numberFrame, text = "√", width = 3, height = 1, command = squareRoot);
+
 buttonClear = tk.Button(master=numberFrame, text = "AC", width = 3, height = 1, command = clearDisplay);
+
 buttonAns = tk.Button(master=numberFrame, text = "ans", width = 3, height = 1, command = answer)
+
 buttonLeftParen = tk.Button(master=numberFrame, text = "(", width = 3, height = 1, command = leftParen)
 buttonRightParen = tk.Button(master=numberFrame, text = ")", width = 3, height = 1, command = rightParen);
+
 buttonBack = tk.Button(master=screenFrame, height = 1, width = 1, text="⌫", command=backspace)
 
+btnCos = tk.Button(master=numberFrame, text="cos", width=3, height=1)
+btnSin = tk.Button(master=numberFrame, text="sin", width=3, height=1)
+btnTan = tk.Button(master=numberFrame, text="tan", width=3, height=1)
 
+btnSec = tk.Button(master=numberFrame, text="2nd",width=3, height=1, bg="#0CC717", fg="white")
 
 # places number buttons
-btn1.grid(row=4, column=0, padx=(10,0), pady=(0,5));
-btn2.grid(row=4, column=1, pady=(0,5));
-btn3.grid(row=4, column=2, padx=(0,18), pady=(0,5));
-btn4.grid(row=3, column=0, padx=(10,0), pady=(0,5));
-btn5.grid(row=3, column=1, pady=(0,5));
-btn6.grid(row=3, column=2, padx=(0,18), pady=(0,5));
-btn7.grid(row=2, column=0, padx=(10,0), pady=(0,5));
-btn8.grid(row=2, column=1, pady=(0,5));
-btn9.grid(row=2, column=2, padx=(0,18), pady=(0,5));
-btn0.grid(row=5, column=0, padx=(10,0), pady=(0,10));
-buttonDecimal.grid(row=5, column=2, padx=(0,18), pady=(0,10));
+btn1.grid(row=5, column=0, padx=(10,0), pady=(0,5));
+btn2.grid(row=5, column=1, pady=(0,5));
+btn3.grid(row=5, column=2, padx=(0,18), pady=(0,5));
+btn4.grid(row=4, column=0, padx=(10,0), pady=(0,5));
+btn5.grid(row=4, column=1, pady=(0,5));
+btn6.grid(row=4, column=2, padx=(0,18), pady=(0,5));
+btn7.grid(row=3, column=0, padx=(10,0), pady=(0,5));
+btn8.grid(row=3, column=1, pady=(0,5));
+btn9.grid(row=3, column=2, padx=(0,18), pady=(0,5));
+btn0.grid(row=6, column=0, padx=(10,0), pady=(0,10));
+buttonDoubleZero.grid(row=6, column=1, pady=(0,10));
+
+buttonDecimal.grid(row=6, column=2, padx=(0,18), pady=(0,10));
 
 
 # places operator buttons
-buttonAdd.grid(row=1, column=3, padx=(0,10), pady=(0,5));
-buttonEqual.grid(row=5, column=3, padx=(0,10), pady=(0,5));
-buttonMinus.grid(row=2, column=3, padx=(0,10), pady=(0,5));
-buttonMult.grid(row=3,column=3, padx=(0,10), pady=(0,5));
-buttonDiv.grid(row=4, column=3, padx=(0,10), pady=(0,5));
+buttonAdd.grid(row=2, column=3, padx=(0,10), pady=(0,5));
+buttonEqual.grid(row=6, column=3, padx=(0,10), pady=(0,10));
+buttonMinus.grid(row=3, column=3, padx=(0,10), pady=(0,5));
+buttonMult.grid(row=4,column=3, padx=(0,10), pady=(0,5));
+buttonDiv.grid(row=5, column=3, padx=(0,10), pady=(0,5));
+
 buttonPerc.grid(row=0, column=2, padx=(0,18), pady=(0,5));
+
 buttonOff.grid(row=0, column=0, padx=(10,0), pady=(0,5));
+
 buttonSqrt.grid(row=0, column=1, pady=(0,5));
+
 buttonClear.grid(row=0, column=3, padx=(0,10), pady=(0,5));
-buttonDoubleZero.grid(row=5, column=1, pady=(0,10));
+
 buttonLeftParen.grid(row=1, column=1, pady=(0,5));
 buttonRightParen.grid(row=1, column=2, padx=(0,18), pady=(0,5));
-buttonAns.grid(row=1, column=0, padx=(10,0), pady=(0,5));
+
+buttonAns.grid(row=1, column=3, padx=(0,10), pady=(0,5));
+
 buttonBack.grid(row=0, column = 5)
 
+btnSin.grid(row=2, column=0, padx=(10,0), pady=(0,5))
+btnCos.grid(row=2, column=1, pady=(0,5))
+btnTan.grid(row=2, column=2, pady=(0,5),padx=(0,18))
+
+btnSec.grid(row=1, column=0, padx=(10,0),pady=(0,5))
 
 
 # frame placements
@@ -356,7 +381,9 @@ numberFrame.grid(row=1)
 
 
 # keeps a list of button names
-buttonNames = [btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,buttonDecimal,buttonAdd,buttonEqual,buttonMinus,buttonMult,buttonDiv,buttonPerc,buttonSqrt,buttonDoubleZero,buttonLeftParen,buttonRightParen,buttonAns,buttonClear, buttonBack]
+buttonNames = [btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,buttonDecimal,buttonAdd,buttonEqual,buttonMinus,buttonMult,buttonDiv,buttonPerc,buttonSqrt,buttonDoubleZero,buttonLeftParen,buttonRightParen,buttonAns,buttonClear, buttonBack, btnSin, btnCos, btnTan, btnSec]
 
 
 window.mainloop();
+
+#sin cos tan second function
