@@ -31,7 +31,7 @@ prevAns = "";
 
 
 # configures number display
-screenDisplay = tk.Label(master=screenFrame, text=equation, relief = tk.SUNKEN, borderwidth=4, anchor="e", fg="black", bg="#B9FFEE", width=21)
+screenDisplay = tk.Label(master=screenFrame, text=equation, relief = tk.SUNKEN, borderwidth=4, anchor="e", fg="black", bg="#B9FFEE", width=20)
 
 screenDisplay.grid(row=0, column=1)
 
