@@ -18,7 +18,7 @@ window.title("Calcutator Fo Real")
 
 
 # frame configurations
-screenFrame = tk.Frame(window)
+screenFrame = tk.Frame(window, pady=(5))
 
 numberFrame = tk.Frame(window)
 
