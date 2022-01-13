@@ -4,6 +4,7 @@ import time
 import warnings
 import re
 
+
 warnings.filterwarnings('ignore')
 
 # window configuration
@@ -464,4 +465,7 @@ buttonNames = [btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,buttonDecimal,b
 
 window.mainloop();
 
-#sin cos tan second function
+# space after sin cos tan to differentiate btwn d and r
+# button to toggle R?
+
+# remove double zero, decimal to left, ans to former dec spot, r/d toggle to former ans spot
