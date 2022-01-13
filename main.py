@@ -1,5 +1,5 @@
 import tkinter as tk;
-import math; from math import sin, cos, tan, radians as r
+import math; from math import sin, asin, cos, acos, tan, atan, radians as r
 import time
 import warnings
 import re
@@ -35,6 +35,8 @@ screenDisplay = tk.Label(master=screenFrame, text=equation, relief = tk.SUNKEN, 
 
 screenDisplay.grid(row=0, column=1)
 
+# second button state
+secState = False
 
 # creates number functions
 def btn0():
@@ -132,30 +134,51 @@ def rightParen():
 
 def sine():
   # checks what the state of btnDegRad is to determine whether to calculate in radians or degrees
-  if not btnDegRad.cget("text") == "Rad":
-    equation.append("sin(");
-  else:
-    equation.append("sin(r(")
+  if not secState:
+    if not btnDegRad.cget("text") == "Rad":
+      equation.append("sin(");
+    else:
+      equation.append("sin(r(")
+
+  elif secState:
+    if not btnDegRad.cget("text") == "Rad":
+      equation.append("asin(");
+    else:
+      equation.append("asin(r(")
 
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def cosine():
   # checks what the state of btnDegRad is to determine whether to calculate in radians or degrees
-  if not btnDegRad.cget("text") == "Rad":
-    equation.append("cos(");
-  else:
-    equation.append("cos(r(")
+  if not secState:
+    if not btnDegRad.cget("text") == "Rad":
+      equation.append("cos(");
+    else:
+      equation.append("cos(r(")
+
+  elif secState:
+    if not btnDegRad.cget("text") == "Rad":
+      equation.append("acos(");
+    else:
+      equation.append("acos(r(")
 
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def tangent():
   # checks what the state of btnDegRad is to determine whether to calculate in radians or degrees
-  if not btnDegRad.cget("text") == "Rad":
-    equation.append("tan(");
-  else:
-    equation.append("tan(r(")
+  if not secState:
+    if not btnDegRad.cget("text") == "Rad":
+      equation.append("tan(");
+    else:
+      equation.append("tan(r(")
+
+  elif secState:
+    if not btnDegRad.cget("text") == "Rad":
+      equation.append("atan(");
+    else:
+      equation.append("atan(r(")
 
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
@@ -325,6 +348,7 @@ def clearDisplay():
     equation.clear();
     screenDisplay.configure(text=''.join(equation));
 
+# toggles between radians and degrees
 def DegRad():
   if btnDegRad.cget("text") == "Deg":
     btnDegRad.configure(text="Rad")
@@ -333,6 +357,23 @@ def DegRad():
   elif btnDegRad.cget("text") == "Rad":
     btnDegRad.configure(text="Deg")
     radLbl.configure(text="Rad")
+
+
+def btnSec():
+  global secState
+
+  if secState:
+    secState = False
+    btnSin.configure(text="sin", fg="#0CC717")
+    btnCos.configure(text="cos", fg="#0CC717")
+    btnTan.configure(text="tan", fg="#0CC717")
+
+  elif not secState:
+    secState = True
+    btnSin.configure(text="sin⁻¹", fg="#0CC717")
+    btnCos.configure(text="cos⁻¹", fg="#0CC717")
+    btnTan.configure(text="tan⁻¹", fg="#0CC717")
+
 
 # creates number buttons
 btn0 = tk.Button(master=numberFrame, text = "0", width = 3, height = 1, command = btn0);
@@ -371,11 +412,11 @@ buttonRightParen = tk.Button(master=numberFrame, text = ")", width = 3, height =
 
 buttonBack = tk.Button(master=screenFrame, height = 1, width = 1, text="⌫", command=backspace)
 
-btnCos = tk.Button(master=numberFrame, text="cos", width=3, height=1, command=cosine)
-btnSin = tk.Button(master=numberFrame, text="sin", width=3, height=1, command=sine)
-btnTan = tk.Button(master=numberFrame, text="tan", width=3, height=1, command=tangent)
+btnCos = tk.Button(master=numberFrame, text="cos", width=3, height=1, fg="#0CC717", command=cosine)
+btnSin = tk.Button(master=numberFrame, text="sin", width=3, height=1, fg="#0CC717", command=sine)
+btnTan = tk.Button(master=numberFrame, text="tan", width=3, height=1, fg="#0CC717", command=tangent)
 
-btnSec = tk.Button(master=numberFrame, text="2nd",width=3, height=1, bg="#0CC717", fg="red")#fg="white"
+btnSec = tk.Button(master=numberFrame, text="2nd",width=3, height=1, bg="#0CC717", fg="white", command=btnSec)
 
 btnDegRad = tk.Button(master=numberFrame, text="Deg", width=3, height=1, command=DegRad)
 
@@ -434,7 +475,8 @@ numberFrame.grid(row=1)
 buttonNames = [btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,buttonDecimal,buttonAdd,buttonEqual,buttonMinus,buttonMult,buttonDiv,buttonPerc,buttonSqrt,buttonLeftParen,buttonRightParen,buttonAns,buttonClear, buttonBack, btnSin, btnCos, btnTan, btnSec, btnDegRad]
 
 
-radLbl = tk.Label(master=screenFrame, text="Rad", font=("Arial", 6), height=1)
+radLbl = tk.Label(master=screenFrame, text="Rad", font=("Arial", 6), anchor="ne", height=1)
+
 
 radLbl.grid(row=0, column=0)
 
