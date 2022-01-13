@@ -4,6 +4,8 @@ import time
 import warnings
 import re
 
+# When in degrees mode, 'r(' is necessary. Default calculation mode is radians. without the r it calculates in radians, hence why radians doesn't have the 'r('
+
 
 warnings.filterwarnings('ignore')
 
