@@ -223,6 +223,12 @@ def percentButton():
   
   if equation != []:
 
+    leftPCount = str(equation).count("(")
+    rightPCount = str(equation).count(")")
+    
+    if leftPCount > rightPCount:
+      equation.append(")")
+
     try:
       combEquation = ''.join(equation);
       combEquation = eval(re.sub(r"((?<=^)|(?<=[^\.\d]))0+(\d+)", r"\1\2", str(combEquation)));
@@ -245,6 +251,13 @@ def squareRoot():
   global prevAns
 
   if equation != []:
+
+    leftPCount = str(equation).count("(")
+    rightPCount = str(equation).count(")")
+    
+    if leftPCount > rightPCount:
+      equation.append(")")
+
     try:
       combEquation = ''.join(equation);
       combEquation = eval(re.sub(r"((?<=^)|(?<=[^\.\d]))0+(\d+)", r"\1\2", str(combEquation)));
