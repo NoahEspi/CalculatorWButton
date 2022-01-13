@@ -489,19 +489,24 @@ numberFrame.grid(row=1)
 # keeps a list of button names
 buttonNames = [btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,buttonDecimal,buttonAdd,buttonEqual,buttonMinus,buttonMult,buttonDiv,buttonPerc,buttonSqrt,buttonLeftParen,buttonRightParen,buttonAns,buttonClear, buttonBack, btnSin, btnCos, btnTan, btnSec, btnDegRad]
 
+# removes bg highlight for all buttons
+# adds fg highlight
 for b in buttonNames:
   b["activeforeground"] = "#625E61"
   b["activebackground"] = b["bg"]
 
-
+# removes bg highlight for colored buttons
+# adds fg highlight
 buttonOff["activebackground"] = buttonOff["bg"]
 buttonOff["activeforeground"] = "lightgray"
 btnSec["activeforeground"] = "lightgray"
 
+# adds fg highlight for colored-text buttons
 btnSin["activeforeground"] = "blue"
 btnCos["activeforeground"] = "blue"
 btnTan["activeforeground"] = "blue"
 
+# creates label displaying radian/degree state
 radLbl = tk.Label(master=screenFrame, text="R", font=("Arial", 6), anchor="ne", height=1, width=1)
 radLbl.grid(row=0, column=0)
 
