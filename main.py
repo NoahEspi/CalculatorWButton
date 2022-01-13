@@ -397,6 +397,7 @@ buttonMinus = tk.Button(master=numberFrame, text = "-", width = 3, height = 1, c
 buttonMult = tk.Button(master=numberFrame, text = "×", width = 3, height = 1, command = multSign)
 buttonDiv = tk.Button(master=numberFrame, text = "÷", width = 3, height = 1, command = divSign)
 
+
 buttonPerc = tk.Button(master=numberFrame, text = "%", width = 3, height = 1, command = percentButton)
 
 buttonOff = tk.Button(master=numberFrame, text = "OFF", width = 3, height = 1, bg="red", fg="white", command = offButton)
@@ -475,6 +476,18 @@ numberFrame.grid(row=1)
 # keeps a list of button names
 buttonNames = [btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,buttonDecimal,buttonAdd,buttonEqual,buttonMinus,buttonMult,buttonDiv,buttonPerc,buttonSqrt,buttonLeftParen,buttonRightParen,buttonAns,buttonClear, buttonBack, btnSin, btnCos, btnTan, btnSec, btnDegRad]
 
+for b in buttonNames:
+  b["activeforeground"] = "#625E61"
+  b["activebackground"] = b["bg"]
+
+
+buttonOff["activebackground"] = buttonOff["bg"]
+buttonOff["activeforeground"] = "lightgray"
+btnSec["activeforeground"] = "lightgray"
+
+btnSin["activeforeground"] = "blue"
+btnCos["activeforeground"] = "blue"
+btnTan["activeforeground"] = "blue"
 
 radLbl = tk.Label(master=screenFrame, text="R", font=("Arial", 6), anchor="ne", height=1, width=1)
 radLbl.grid(row=0, column=0)
