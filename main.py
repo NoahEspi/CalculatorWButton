@@ -31,7 +31,7 @@ prevAns = "";
 
 
 # configures number display
-screenDisplay = tk.Label(master=screenFrame, text=equation, relief = tk.SUNKEN, borderwidth=4, anchor="e", fg="black", bg="#B9FFEE", width=22)
+screenDisplay = tk.Label(master=screenFrame, text=equation, relief = tk.SUNKEN, borderwidth=4, anchor="e", fg="black", bg="#B9FFEE", width=21)
 
 screenDisplay.grid(row=0, column=1)
 
@@ -352,11 +352,11 @@ def clearDisplay():
 def DegRad():
   if btnDegRad.cget("text") == "Deg":
     btnDegRad.configure(text="Rad")
-    radLbl.configure(text="Deg")
+    radLbl.configure(text="D")
     
   elif btnDegRad.cget("text") == "Rad":
     btnDegRad.configure(text="Deg")
-    radLbl.configure(text="Rad")
+    radLbl.configure(text="R")
 
 
 def btnSec():
@@ -420,6 +420,7 @@ btnSec = tk.Button(master=numberFrame, text="2nd",width=3, height=1, bg="#0CC717
 
 btnDegRad = tk.Button(master=numberFrame, text="Deg", width=3, height=1, command=DegRad)
 
+
 # places number buttons
 btn1.grid(row=5, column=0, padx=(10,0), pady=(0,5));
 btn2.grid(row=5, column=1, pady=(0,5));
@@ -475,9 +476,7 @@ numberFrame.grid(row=1)
 buttonNames = [btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,buttonDecimal,buttonAdd,buttonEqual,buttonMinus,buttonMult,buttonDiv,buttonPerc,buttonSqrt,buttonLeftParen,buttonRightParen,buttonAns,buttonClear, buttonBack, btnSin, btnCos, btnTan, btnSec, btnDegRad]
 
 
-radLbl = tk.Label(master=screenFrame, text="Rad", font=("Arial", 6), anchor="ne", height=1)
-
-
+radLbl = tk.Label(master=screenFrame, text="R", font=("Arial", 6), anchor="ne", height=1, width=1)
 radLbl.grid(row=0, column=0)
 
 
