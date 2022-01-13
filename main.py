@@ -199,7 +199,7 @@ def equalSign():
     leftPCount = str(equation).count("(")
     rightPCount = str(equation).count(")")
     
-    if leftPCount > rightPCount:
+    for i in range(leftPCount-rightPCount):
       equation.append(")")
 
     try:
@@ -228,7 +228,7 @@ def percentButton():
     leftPCount = str(equation).count("(")
     rightPCount = str(equation).count(")")
     
-    if leftPCount > rightPCount:
+    for i in range(leftPCount-rightPCount):
       equation.append(")")
 
     try:
@@ -257,7 +257,7 @@ def squareRoot():
     leftPCount = str(equation).count("(")
     rightPCount = str(equation).count(")")
     
-    if leftPCount > rightPCount:
+    for i in range(leftPCount-rightPCount):
       equation.append(")")
 
     try:
