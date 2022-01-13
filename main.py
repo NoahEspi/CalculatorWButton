@@ -1,5 +1,5 @@
 import tkinter as tk;
-import math; from math import sin, cos, tan
+import math; from math import sin, cos, tan, radians as r
 import time
 import warnings
 import re
@@ -10,17 +10,18 @@ warnings.filterwarnings('ignore')
 # window configuration
 window = tk.Tk();
 
-window.columnconfigure(0, weight=1, minsize=50)
-window.rowconfigure(0, weight=1, minsize=50)
+window.columnconfigure(0, weight=1)
+window.rowconfigure(0, weight=1)
 
 window.title("Calcutator Fo Real")
 
 
 
 # frame configurations
-screenFrame = tk.Frame(window, borderwidth = 1)
+screenFrame = tk.Frame(window)
 
 numberFrame = tk.Frame(window)
+
 
 
 # establishes variables
@@ -33,7 +34,6 @@ prevAns = "";
 screenDisplay = tk.Label(master=screenFrame, text=equation, relief = tk.SUNKEN, borderwidth=4, anchor="e", fg="black", bg="#B9FFEE", width=22)
 
 screenDisplay.grid(row=0, column=1)
-
 
 
 # creates number functions
@@ -131,17 +131,32 @@ def rightParen():
   buttonClear.configure(text="C");
 
 def sine():
-  equation.append("sin( ");
+  # checks what the state of btnDegRad is to determine whether to calculate in radians or degrees
+  if not btnDegRad.cget("text") == "Rad":
+    equation.append("sin(");
+  else:
+    equation.append("sin(r(")
+
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def cosine():
-  equation.append("cos( ");
+  # checks what the state of btnDegRad is to determine whether to calculate in radians or degrees
+  if not btnDegRad.cget("text") == "Rad":
+    equation.append("cos(");
+  else:
+    equation.append("cos(r(")
+
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def tangent():
-  equation.append("tan( ");
+  # checks what the state of btnDegRad is to determine whether to calculate in radians or degrees
+  if not btnDegRad.cget("text") == "Rad":
+    equation.append("tan(");
+  else:
+    equation.append("tan(r(")
+
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
@@ -163,69 +178,12 @@ def equalSign():
       equation.append(")")
 
     try:
-
-      combEquation = ''.join(equation);
-
-      if "cos(" in combEquation:
-        
-        cosCount = equation.count("cos( ");
-        
-        #print(cosCount);
-        
-        for i in range(cosCount):
-          
-          equation = ''.join(equation)
-
-          cosLoc = equation.index("cos( ");
-
-          print(cosLoc)
-          
-          print(equation[cosLoc])
-
-          equation = equation[0:cosLoc] + "cos(math.degrees(" + equation[cosLoc+5:] + ")" + equation[cosLoc+7:];
-
-          combEquation = ''.join(equation);
-
-          print(combEquation)
-
-          combEquation = eval(str(combEquation));
-
+    
       combEquation = ''.join(equation)
 
-      if "sin( " in combEquation:
-
-        sinLoc = equation.index("sin( ");
-
-        equation = ''.join(equation)
-
-        equation = equation[0:sinLoc] + "sin(math.degrees(" + equation[sinLoc+4] + ")" + equation[sinLoc+5:];
-
-
-        combEquation = ''.join(equation);
-
-        combEquation = eval(str(combEquation))
-
-      combEquation = ''.join(equation)
-
-      if "tan( " in combEquation:
-
-        tanLoc = equation.index("tan( ");
-
-        equation = ''.join(equation)
-
-        equation = equation[0:tanLoc] + "tan(math.degrees(" + equation[tanLoc+4] + ")" + equation[tanLoc+5:];
-
-
-        combEquation = ''.join(equation);
-
-        combEquation = eval(str(combEquation));
-
-
-      if not "tan(" in equation or not "sin(" in equation or not "cos(" in equation:
-        combEquation = eval(re.sub(r"((?<=^)|(?<=[^\.\d]))0+(\d+)", r"\1\2", str(combEquation)));
+      combEquation = eval(re.sub(r"((?<=^)|(?<=[^\.\d]))0+(\d+)", r"\1\2", str(combEquation)));
 
       screenDisplay.configure(text=str(combEquation));
-      equation = list(equation)
       equation.clear()
       prevAns = str(combEquation);
 
@@ -292,6 +250,8 @@ def offButton():
     for b in buttonNames:
       b.configure(state="disabled");
     
+    radLbl.configure(fg="gray")
+
     # changes state (word) of power button
     buttonOff.configure(text="ON")
     
@@ -309,6 +269,8 @@ def offButton():
     # changes button states
     for b in buttonNames:
       b.configure(state="normal")
+
+    radLbl.configure(fg="black")
 
     # changes state (word) of power button
     buttonOff.configure(text="OFF")
@@ -363,7 +325,14 @@ def clearDisplay():
     equation.clear();
     screenDisplay.configure(text=''.join(equation));
 
-
+def DegRad():
+  if btnDegRad.cget("text") == "Deg":
+    btnDegRad.configure(text="Rad")
+    radLbl.configure(text="Deg")
+    
+  elif btnDegRad.cget("text") == "Rad":
+    btnDegRad.configure(text="Deg")
+    radLbl.configure(text="Rad")
 
 # creates number buttons
 btn0 = tk.Button(master=numberFrame, text = "0", width = 3, height = 1, command = btn0);
@@ -376,7 +345,6 @@ btn6 = tk.Button(master=numberFrame, text = "6", width = 3, height = 1, command 
 btn7 = tk.Button(master=numberFrame, text = "7", width = 3, height = 1, command = btn7);
 btn8 = tk.Button(master=numberFrame, text = "8", width = 3, height = 1, command = btn8);
 btn9 = tk.Button(master=numberFrame, text = "9", width = 3, height = 1, command = btn9);
-buttonDoubleZero = tk.Button(master = numberFrame, text="00", width = 3, height = 1, command = doubleZero)
 
 buttonDecimal = tk.Button(master=numberFrame, text = ".", width = 3, height = 1, command = decimal)
 
@@ -403,11 +371,13 @@ buttonRightParen = tk.Button(master=numberFrame, text = ")", width = 3, height =
 
 buttonBack = tk.Button(master=screenFrame, height = 1, width = 1, text="⌫", command=backspace)
 
-btnCos = tk.Button(master=numberFrame, text="cos", width=3, height=1, fg="red", command=cosine)
-btnSin = tk.Button(master=numberFrame, text="sin", width=3, height=1, fg="red", command=sine)
-btnTan = tk.Button(master=numberFrame, text="tan", width=3, height=1, fg="red", command=tangent)
+btnCos = tk.Button(master=numberFrame, text="cos", width=3, height=1, command=cosine)
+btnSin = tk.Button(master=numberFrame, text="sin", width=3, height=1, command=sine)
+btnTan = tk.Button(master=numberFrame, text="tan", width=3, height=1, command=tangent)
 
 btnSec = tk.Button(master=numberFrame, text="2nd",width=3, height=1, bg="#0CC717", fg="red")#fg="white"
+
+btnDegRad = tk.Button(master=numberFrame, text="Deg", width=3, height=1, command=DegRad)
 
 # places number buttons
 btn1.grid(row=5, column=0, padx=(10,0), pady=(0,5));
@@ -420,9 +390,8 @@ btn7.grid(row=3, column=0, padx=(10,0), pady=(0,5));
 btn8.grid(row=3, column=1, pady=(0,5));
 btn9.grid(row=3, column=2, padx=(0,18), pady=(0,5));
 btn0.grid(row=6, column=0, padx=(10,0), pady=(0,10));
-buttonDoubleZero.grid(row=6, column=1, pady=(0,10));
 
-buttonDecimal.grid(row=6, column=2, padx=(0,18), pady=(0,10));
+buttonDecimal.grid(row=6, column=1, pady=(0,10));
 
 
 # places operator buttons
@@ -443,7 +412,7 @@ buttonClear.grid(row=0, column=3, padx=(0,10), pady=(0,5));
 buttonLeftParen.grid(row=1, column=1, pady=(0,5));
 buttonRightParen.grid(row=1, column=2, padx=(0,18), pady=(0,5));
 
-buttonAns.grid(row=1, column=3, padx=(0,10), pady=(0,5));
+buttonAns.grid(row=6, column=2, padx=(0,18), pady=(0,10));
 
 buttonBack.grid(row=0, column = 5)
 
@@ -453,6 +422,8 @@ btnTan.grid(row=2, column=2, pady=(0,5),padx=(0,18))
 
 btnSec.grid(row=1, column=0, padx=(10,0),pady=(0,5))
 
+btnDegRad.grid(row=1, column=3, padx=(0,10), pady=(0,5))
+
 
 # frame placements
 screenFrame.grid(row=0)
@@ -460,12 +431,12 @@ numberFrame.grid(row=1)
 
 
 # keeps a list of button names
-buttonNames = [btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,buttonDecimal,buttonAdd,buttonEqual,buttonMinus,buttonMult,buttonDiv,buttonPerc,buttonSqrt,buttonDoubleZero,buttonLeftParen,buttonRightParen,buttonAns,buttonClear, buttonBack, btnSin, btnCos, btnTan, btnSec]
+buttonNames = [btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,buttonDecimal,buttonAdd,buttonEqual,buttonMinus,buttonMult,buttonDiv,buttonPerc,buttonSqrt,buttonLeftParen,buttonRightParen,buttonAns,buttonClear, buttonBack, btnSin, btnCos, btnTan, btnSec, btnDegRad]
+
+
+radLbl = tk.Label(master=screenFrame, text="Rad", font=("Arial", 6), height=1)
+
+radLbl.grid(row=0, column=0)
 
 
 window.mainloop();
-
-# space after sin cos tan to differentiate btwn d and r
-# button to toggle R?
-
-# remove double zero, decimal to left, ans to former dec spot, r/d toggle to former ans spot
