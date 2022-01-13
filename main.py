@@ -130,17 +130,17 @@ def rightParen():
   buttonClear.configure(text="C");
 
 def sine():
-  equation.append("sin(");
+  equation.append("sin( ");
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def cosine():
-  equation.append("cos(");
+  equation.append("cos( ");
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
 def tangent():
-  equation.append("tan(");
+  equation.append("tan( ");
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
@@ -167,26 +167,33 @@ def equalSign():
 
       if "cos(" in combEquation:
         
-        cosCount = equation.count("cos(");
+        cosCount = equation.count("cos( ");
         
-        print(cosCount);
+        #print(cosCount);
         
         for i in range(cosCount):
-          cosLoc = equation.index("cos(");
-
+          
           equation = ''.join(equation)
 
-          equation = equation[0:cosLoc] + "cos(math.degrees(" + equation[cosLoc+4] + ")" + equation[cosLoc+5:];
+          cosLoc = equation.index("cos( ");
+
+          print(cosLoc)
+          
+          print(equation[cosLoc])
+
+          equation = equation[0:cosLoc] + "cos(math.degrees(" + equation[cosLoc+5:] + ")" + equation[cosLoc+7:];
 
           combEquation = ''.join(equation);
+
+          print(combEquation)
 
           combEquation = eval(str(combEquation));
 
       combEquation = ''.join(equation)
 
-      if "sin(" in combEquation:
+      if "sin( " in combEquation:
 
-        sinLoc = equation.index("sin(");
+        sinLoc = equation.index("sin( ");
 
         equation = ''.join(equation)
 
@@ -199,9 +206,9 @@ def equalSign():
 
       combEquation = ''.join(equation)
 
-      if "tan(" in combEquation:
+      if "tan( " in combEquation:
 
-        tanLoc = equation.index("tan(");
+        tanLoc = equation.index("tan( ");
 
         equation = ''.join(equation)
 
@@ -395,11 +402,11 @@ buttonRightParen = tk.Button(master=numberFrame, text = ")", width = 3, height =
 
 buttonBack = tk.Button(master=screenFrame, height = 1, width = 1, text="⌫", command=backspace)
 
-btnCos = tk.Button(master=numberFrame, text="cos", width=3, height=1, command=cosine)
-btnSin = tk.Button(master=numberFrame, text="sin", width=3, height=1, command=sine)
-btnTan = tk.Button(master=numberFrame, text="tan", width=3, height=1, command=tangent)
+btnCos = tk.Button(master=numberFrame, text="cos", width=3, height=1, fg="red", command=cosine)
+btnSin = tk.Button(master=numberFrame, text="sin", width=3, height=1, fg="red", command=sine)
+btnTan = tk.Button(master=numberFrame, text="tan", width=3, height=1, fg="red", command=tangent)
 
-btnSec = tk.Button(master=numberFrame, text="2nd",width=3, height=1, bg="#0CC717", fg="white")
+btnSec = tk.Button(master=numberFrame, text="2nd",width=3, height=1, bg="#0CC717", fg="red")#fg="white"
 
 # places number buttons
 btn1.grid(row=5, column=0, padx=(10,0), pady=(0,5));
