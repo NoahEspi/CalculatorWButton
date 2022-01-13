@@ -364,15 +364,15 @@ def btnSec():
 
   if secState:
     secState = False
-    btnSin.configure(text="sin", fg="#0CC717")
-    btnCos.configure(text="cos", fg="#0CC717")
-    btnTan.configure(text="tan", fg="#0CC717")
+    btnSin.configure(text="sin", fg="#2D79F0")
+    btnCos.configure(text="cos", fg="#2D79F0")
+    btnTan.configure(text="tan", fg="#2D79F0")
 
   elif not secState:
     secState = True
-    btnSin.configure(text="sin⁻¹", fg="#0CC717")
-    btnCos.configure(text="cos⁻¹", fg="#0CC717")
-    btnTan.configure(text="tan⁻¹", fg="#0CC717")
+    btnSin.configure(text="sin⁻¹", fg="#2D79F0")
+    btnCos.configure(text="cos⁻¹", fg="#2D79F0")
+    btnTan.configure(text="tan⁻¹", fg="#2D79F0")
 
 
 # creates number buttons
@@ -412,11 +412,11 @@ buttonRightParen = tk.Button(master=numberFrame, text = ")", width = 3, height =
 
 buttonBack = tk.Button(master=screenFrame, height = 1, width = 1, text="⌫", command=backspace)
 
-btnCos = tk.Button(master=numberFrame, text="cos", width=3, height=1, fg="#0CC717", command=cosine)
-btnSin = tk.Button(master=numberFrame, text="sin", width=3, height=1, fg="#0CC717", command=sine)
-btnTan = tk.Button(master=numberFrame, text="tan", width=3, height=1, fg="#0CC717", command=tangent)
+btnCos = tk.Button(master=numberFrame, text="cos", width=3, height=1, fg="#2D79F0", command=cosine)
+btnSin = tk.Button(master=numberFrame, text="sin", width=3, height=1, fg="#2D79F0", command=sine)
+btnTan = tk.Button(master=numberFrame, text="tan", width=3, height=1, fg="#2D79F0", command=tangent)
 
-btnSec = tk.Button(master=numberFrame, text="2nd",width=3, height=1, bg="#0CC717", fg="white", command=btnSec)
+btnSec = tk.Button(master=numberFrame, text="2nd",width=3, height=1, bg="#2D79F0", fg="white", command=btnSec)
 
 btnDegRad = tk.Button(master=numberFrame, text="Deg", width=3, height=1, command=DegRad)
 
