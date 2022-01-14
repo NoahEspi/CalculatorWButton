@@ -6,7 +6,6 @@ import re
 
 # When in degrees mode, 'r(' is necessary. Default calculation mode is radians. without the r it calculates in radians, hence why radians doesn't have the 'r('
 
-
 warnings.filterwarnings('ignore')
 
 # window configuration
@@ -29,7 +28,6 @@ numberFrame = tk.Frame(window)
 # establishes variables
 equation = [];
 prevAns = "";
-
 
 
 # configures number display
@@ -115,7 +113,10 @@ def minusSign():
   buttonClear.configure(text="C");
 
 def multSign():
-  equation.append('*');
+  if buttonMult.cget("text") == '×':
+    equation.append('*');
+  elif buttonMult.cget("text") == "^":
+    equation.append("**")
   screenDisplay.configure(text=''.join(equation));
   buttonClear.configure(text="C");
 
@@ -382,12 +383,14 @@ def btnSec():
     btnSin.configure(text="sin", fg="#2D79F0")
     btnCos.configure(text="cos", fg="#2D79F0")
     btnTan.configure(text="tan", fg="#2D79F0")
+    buttonMult.configure(text='×', fg="#2D79F0")
 
   elif not secState:
     secState = True
     btnSin.configure(text="sin⁻¹", fg="#2D79F0")
     btnCos.configure(text="cos⁻¹", fg="#2D79F0")
     btnTan.configure(text="tan⁻¹", fg="#2D79F0")
+    buttonMult.configure(text="^", fg="#2D79F0")
 
 
 # creates number buttons
@@ -409,7 +412,7 @@ buttonDecimal = tk.Button(master=numberFrame, text = ".", width = 3, height = 1,
 buttonAdd = tk.Button(master=numberFrame, text = "+", width = 3, height = 1, command = addSign);
 buttonEqual = tk.Button(master=numberFrame, text = "=", width = 3, height = 1, command = equalSign)
 buttonMinus = tk.Button(master=numberFrame, text = "-", width = 3, height = 1, command = minusSign)
-buttonMult = tk.Button(master=numberFrame, text = "×", width = 3, height = 1, command = multSign)
+buttonMult = tk.Button(master=numberFrame, text = "×",fg="#2D79F0", width = 3, height = 1, command = multSign)
 buttonDiv = tk.Button(master=numberFrame, text = "÷", width = 3, height = 1, command = divSign)
 
 
