@@ -413,7 +413,7 @@ buttonAdd = tk.Button(master=numberFrame, text = "+", width = 3, height = 1, com
 buttonEqual = tk.Button(master=numberFrame, text = "=", width = 3, height = 1, command = equalSign)
 buttonMinus = tk.Button(master=numberFrame, text = "-", width = 3, height = 1, command = minusSign)
 buttonMult = tk.Button(master=numberFrame, text = "×",fg="#2D79F0", width = 3, height = 1, command = multSign)
-buttonDiv = tk.Button(master=numberFrame, text = "÷", width = 3, height = 1, command = divSign)
+buttonDiv = tk.Button(master=numberFrame, text = "/", width = 3, height = 1, command = divSign)
 
 
 buttonPerc = tk.Button(master=numberFrame, text = "%", width = 3, height = 1, command = percentButton)
