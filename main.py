@@ -203,6 +203,18 @@ def equalSign():
     for i in range(leftPCount-rightPCount):
       equation.append(")")
 
+
+    equation = ''.join(equation);
+    equation = list(equation);
+
+    count=0
+
+    for i in range(len(equation)):
+      if equation[i] == '(' and i > 0 :
+        if equation[i-1] in '1234567890)':
+          equation.insert(i+count,'*')
+          count+=1
+    
     try:
     
       combEquation = ''.join(equation)
