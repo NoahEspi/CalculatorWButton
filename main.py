@@ -7,7 +7,9 @@ import re
 # When in degrees mode, 'r(' is necessary. Default calculation mode is radians. without the r it calculates in radians, hence why radians doesn't have the 'r('
 
 # you *can* use keyboard numbers instead of clickable buttons for most buttons.
-# exceptions include: sqrt, off, C, Deg, and Rad
+# exceptions include: sqrt, off, Deg, and Rad
+
+# all buttons will be the same as they appear on the calculator except: C/AC is Del and 2nd is the space bar
 
 warnings.filterwarnings('ignore')
 
@@ -430,6 +432,8 @@ def onKeyPress(event):
     backspace()
   elif event.keysym == "space":
     btnSec()
+  elif event.keysym == "Delete":
+    clearDisplay()
   elif event.char == "%":
     percentButton()
   elif event.char == "^":
