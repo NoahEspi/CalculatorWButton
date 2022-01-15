@@ -419,18 +419,21 @@ def onKeyPress(event):
     sine();
   elif event.char.lower() == 't':
     tangent();
+  elif event.char.lower() == "a":
+    answer()
   elif event.keysym == "Return":
     equalSign();
   elif event.keysym == "BackSpace":
     backspace()
+  elif event.keysym == "space":
+    btnSec()
   elif event.char == "%":
     percentButton()
   elif event.char == "^":
     equation.append("**")
     screenDisplay.configure(text=''.join(equation))
-  elif event.char == "a":
-    answer()
   
+
 window.bind('<KeyPress>', onKeyPress)
 
 
@@ -477,7 +480,7 @@ btnCos = tk.Button(master=numberFrame, text="cos", width=3, height=1, fg="#2D79F
 btnSin = tk.Button(master=numberFrame, text="sin", width=3, height=1, fg="#2D79F0", command=sine)
 btnTan = tk.Button(master=numberFrame, text="tan", width=3, height=1, fg="#2D79F0", command=tangent)
 
-btnSec = tk.Button(master=numberFrame, text="2nd",width=3, height=1, bg="#2D79F0", fg="white", command=btnSec)
+btnSecond = tk.Button(master=numberFrame, text="2nd",width=3, height=1, bg="#2D79F0", fg="white", command=btnSec)
 
 btnDegRad = tk.Button(master=numberFrame, text="Deg", width=3, height=1, command=DegRad)
 
@@ -523,7 +526,7 @@ btnSin.grid(row=2, column=0, padx=(10,0), pady=(0,5))
 btnCos.grid(row=2, column=1, pady=(0,5))
 btnTan.grid(row=2, column=2, pady=(0,5),padx=(0,18))
 
-btnSec.grid(row=1, column=0, padx=(10,0),pady=(0,5))
+btnSecond.grid(row=1, column=0, padx=(10,0),pady=(0,5))
 
 btnDegRad.grid(row=1, column=3, padx=(0,10), pady=(0,5))
 
@@ -534,7 +537,7 @@ numberFrame.grid(row=1)
 
 
 # keeps a list of button names
-buttonNames = [btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,buttonDecimal,buttonAdd,buttonEqual,buttonMinus,buttonMult,buttonDiv,buttonPerc,buttonSqrt,buttonLeftParen,buttonRightParen,buttonAns,buttonClear, buttonBack, btnSin, btnCos, btnTan, btnSec, btnDegRad]
+buttonNames = [btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,buttonDecimal,buttonAdd,buttonEqual,buttonMinus,buttonMult,buttonDiv,buttonPerc,buttonSqrt,buttonLeftParen,buttonRightParen,buttonAns,buttonClear, buttonBack, btnSin, btnCos, btnTan, btnSecond, btnDegRad]
 
 # removes bg highlight for all buttons
 # adds fg highlight
@@ -546,7 +549,7 @@ for b in buttonNames:
 # adds fg highlight
 buttonOff["activebackground"] = buttonOff["bg"]
 buttonOff["activeforeground"] = "lightgray"
-btnSec["activeforeground"] = "lightgray"
+btnSecond["activeforeground"] = "lightgray"
 
 # adds fg highlight for colored-text buttons
 btnSin["activeforeground"] = "blue"
