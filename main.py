@@ -418,6 +418,7 @@ def onKeyPress(event):
   if event.char in "1234567890()+*-/.":
     equation.append(event.char)
     screenDisplay.configure(text=''.join(equation))
+    buttonClear.configure(text="C");
   elif event.char.lower() == 'c':
     cosine();
   elif event.char.lower() == 's':
