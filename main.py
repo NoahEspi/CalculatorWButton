@@ -6,6 +6,9 @@ import re
 
 # When in degrees mode, 'r(' is necessary. Default calculation mode is radians. without the r it calculates in radians, hence why radians doesn't have the 'r('
 
+# you *can* use keyboard numbers instead of clickable buttons for most buttons.
+# exceptions include: sqrt, off, C, Deg, and Rad
+
 warnings.filterwarnings('ignore')
 
 # window configuration
