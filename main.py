@@ -187,6 +187,7 @@ def tangent():
   buttonClear.configure(text="C");
 
 
+
 # calculation functions
 
 # calculates exisitng equation. if it can't, returns error
@@ -229,6 +230,7 @@ def equalSign():
       equation = list(equation)
       equation.clear();
       screenDisplay.configure(text="ERROR: SYNTAX")
+
 
 
 # same function as equalSign except divides the answer by 100
@@ -403,6 +405,34 @@ def btnSec():
     btnCos.configure(text="cos⁻¹", fg="#2D79F0")
     btnTan.configure(text="tan⁻¹", fg="#2D79F0")
     buttonMult.configure(text="^", fg="#2D79F0")
+
+
+
+# allows keyboard presses to work
+def onKeyPress(event):
+  if event.char in "1234567890()+*-/.":
+    equation.append(event.char)
+    screenDisplay.configure(text=''.join(equation))
+  elif event.char.lower() == 'c':
+    cosine();
+  elif event.char.lower() == 's':
+    sine();
+  elif event.char.lower() == 't':
+    tangent();
+  elif event.keysym == "Return":
+    equalSign();
+  elif event.keysym == "BackSpace":
+    backspace()
+  elif event.char == "%":
+    percentButton()
+  elif event.char == "^":
+    equation.append("**")
+    screenDisplay.configure(text=''.join(equation))
+  elif event.char == "a":
+    answer()
+  
+window.bind('<KeyPress>', onKeyPress)
+
 
 
 # creates number buttons
